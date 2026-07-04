@@ -2,7 +2,7 @@
    Robusto a preview que isola localStorage por página: aqui é tudo um documento. */
 (function(){
   "use strict";
-  var CK="v4hooks:curso";
+  var CK=((document.querySelector('meta[name="curso"]')||{}).content)||"v4:curso";
   var today=Math.floor(Date.now()/86400000);
 
   document.body.insertAdjacentHTML('afterbegin',
