@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Claude Code na prática · INEMA.CLUB PRO</title>
+<title>Hooks do Claude Code · INEMA.CLUB PRO</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -57,15 +57,17 @@
   .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);margin:0 0 20px}
   h1{font-family:var(--serif);font-weight:500;font-size:clamp(44px,7vw,84px);line-height:.98;letter-spacing:-.025em;margin:0 0 24px}
   h1 em{font-style:italic;color:var(--accent)}
-  .lead{font-family:var(--serif);font-size:clamp(19px,2.2vw,25px);line-height:1.5;color:var(--ink-soft);max-width:40ch;margin:0 0 30px}
+  .lead{font-family:var(--serif);font-size:clamp(19px,2.2vw,25px);line-height:1.5;color:var(--ink-soft);max-width:42ch;margin:0 0 30px}
   .cta{display:flex;gap:12px;flex-wrap:wrap}
   .btn{font-family:var(--mono);font-size:13px;letter-spacing:.03em;text-decoration:none;padding:13px 20px;border-radius:12px;cursor:pointer;transition:transform .15s}
   .btn.pri{background:var(--accent);color:var(--accent-ink);font-weight:700;border:none}
+  .btn.pri:hover{transform:translateY(-2px)}
   .btn.sec{background:none;color:var(--ink-soft);border:1px solid var(--line2)}
   .btn.sec:hover{border-color:var(--accent);color:var(--ink)}
   .herofig{display:grid;place-items:center}
   .herofig svg{width:min(100%,380px);height:auto;filter:drop-shadow(0 24px 60px rgba(0,0,0,.5))}
   .blink{animation:blink 1.1s steps(1) infinite}@keyframes blink{50%{opacity:0}}
+  .pulse{animation:pulse 2.4s ease-in-out infinite}@keyframes pulse{0%,100%{opacity:.5}50%{opacity:1}}
   .stats{display:flex;gap:28px;flex-wrap:wrap;margin-top:40px;position:relative;z-index:2}
   .stat{display:flex;flex-direction:column}
   .stat b{font-family:var(--serif);font-size:34px;font-weight:500;color:var(--ink);line-height:1}
@@ -84,16 +86,14 @@
   .flow .ar{color:var(--accent)}
 
   /* trilhas grid */
-  .trilhas{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .trilhas{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
   .tr{display:flex;flex-direction:column;text-decoration:none;color:inherit;background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line);border-radius:18px;padding:24px;transition:border-color .2s,transform .2s}
   .tr:hover{border-color:var(--hue);transform:translateY(-3px)}
   .tr .tn{font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:var(--hue);margin:0 0 14px;display:flex;align-items:center;gap:10px}
   .tr .tn i{width:26px;height:26px;border-radius:8px;display:grid;place-items:center;background:color-mix(in srgb,var(--hue) 18%,transparent);color:var(--hue);font-style:normal;font-weight:700}
   .tr h3{font-family:var(--serif);font-weight:500;font-size:23px;margin:0 0 10px;letter-spacing:-.01em}
   .tr p{font-size:14.5px;color:var(--muted);margin:0 0 18px;flex:1}
-  .tr .meta{font-family:var(--mono);font-size:11px;color:var(--faint);letter-spacing:.04em}
-  .tr .soon{color:var(--faint)}
-  .tr.live .meta{color:var(--hue)}
+  .tr .meta{font-family:var(--mono);font-size:11px;color:var(--hue);letter-spacing:.04em}
 
   /* como aprende */
   .grid3{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
@@ -117,77 +117,74 @@
 <body>
 <div class="grain"></div>
 <div class="bar"><div class="bar-inner">
-  <span class="brand"><a class="mark" href="https://inema.club" target="_blank" rel="noopener">INEMA.CLUB</a><a class="pro" href="https://inema.pro" target="_blank" rel="noopener">PRO</a><a class="course" href="landing.html">Claude Code na prática</a></span>
+  <span class="brand"><a class="mark" href="https://inema.club" target="_blank" rel="noopener">INEMA.CLUB</a><a class="pro" href="https://inema.pro" target="_blank" rel="noopener">PRO</a><a class="course" href="landing.html">Hooks do Claude Code</a></span>
   <a class="lnk" href="#trilhas">trilhas</a>
   <a class="lnk" href="#metodo">método</a>
   <button id="themebtn">tema: escuro</button>
 </div>
 <div class="subnav"><div class="subnav-inner">
-  <a href="#trilhas" class="soon">01 Fundamentos</a>
-  <a href="#trilhas" class="soon">02 Fluxo</a>
-  <a href="curso.html#trilha">03 Automação</a>
-  <a href="#trilhas" class="soon">04 Agentes</a>
-  <a href="#trilhas" class="soon">05 MCP</a>
-  <a href="#trilhas" class="soon">06 Escala</a>
+  <a href="curso.html#trilha">01 Fundamentos</a>
+  <a href="curso-guardrails.html#trilha">02 Guardrails</a>
+  <a href="curso-automacao.html#trilha">03 Automação</a>
+  <a href="curso-time.html#trilha">04 Equipe &amp; CI</a>
 </div></div>
 </div>
 
 <header class="hero"><div class="wrap">
   <div class="hero-grid">
     <div>
-      <p class="kicker">Curso · Nível iniciante → avançado</p>
-      <h1>Claude Code<br><em>na prática</em></h1>
-      <p class="lead">Do primeiro projeto ao fluxo de um profissional: prompts, contexto, hooks, agentes e MCP — aprendendo fazendo, com retenção de verdade.</p>
+      <p class="kicker">Curso · Claude Code · iniciante → avançado</p>
+      <h1>Hooks do<br><em>Claude Code</em></h1>
+      <p class="lead">Faça o Claude Code seguir suas regras sozinho: "quando isto acontecer → roda aquilo". Dos fundamentos às travas, à automação e ao uso em equipe — aprendendo fazendo, com retenção de verdade.</p>
       <div class="cta">
-        <a class="btn pri" href="curso.html#trilha">Começar pela Trilha 1 →</a>
+        <a class="btn pri" href="curso.html#trilha">Começar pelos Fundamentos →</a>
         <a class="btn sec" href="#trilhas">Ver as trilhas</a>
       </div>
     </div>
     <div class="herofig">
       <svg viewBox="0 0 300 230" fill="none" aria-hidden="true">
-        <rect x="26" y="26" width="248" height="178" rx="16" fill="#15131d" stroke="#37324a" stroke-width="1.5"/>
-        <rect x="26" y="26" width="248" height="30" rx="16" fill="#221f2e"/>
-        <circle cx="46" cy="41" r="4" fill="#F2B45C"/><circle cx="61" cy="41" r="4" fill="#37324a"/><circle cx="76" cy="41" r="4" fill="#37324a"/>
-        <text x="48" y="88" font-family="Space Mono, monospace" font-size="13" fill="#7CE0C6">$ claude</text>
-        <text x="48" y="112" font-family="Space Mono, monospace" font-size="12" fill="#C7C2D0">› planeje, edite, rode</text>
-        <text x="48" y="136" font-family="Space Mono, monospace" font-size="12" fill="#948DA6">› hooks, agentes, mcp</text>
-        <rect class="blink" x="48" y="150" width="10" height="15" fill="#7CE0C6"/>
-        <text x="150" y="192" text-anchor="middle" font-family="Newsreader, serif" font-style="italic" font-size="15" fill="#C7C2D0">seu par de programação</text>
+        <circle cx="58" cy="80" r="28" fill="none" stroke="#37324a" stroke-width="1.5"/>
+        <path class="pulse" d="M62 66 l-11 20 h9 l-4 15 13 -21 h-9 z" fill="#F2B45C"/>
+        <text x="58" y="128" text-anchor="middle" font-family="Space Mono, monospace" font-size="10" fill="#948DA6">evento</text>
+        <path class="pulse" d="M90 80 H150" stroke="#7CE0C6" stroke-width="2"/><path d="M150 74 l10 6 -10 6z" fill="#7CE0C6"/>
+        <rect x="168" y="44" width="112" height="72" rx="14" fill="#15131d" stroke="#37324a" stroke-width="1.5"/>
+        <rect x="168" y="44" width="112" height="24" rx="14" fill="#221f2e"/>
+        <circle cx="184" cy="56" r="3.5" fill="#F2B45C"/><circle cx="196" cy="56" r="3.5" fill="#37324a"/>
+        <text x="182" y="96" font-family="Space Mono, monospace" font-size="12" fill="#7CE0C6">$ hook</text>
+        <rect class="blink" x="182" y="102" width="9" height="13" fill="#7CE0C6"/>
+        <text x="224" y="128" text-anchor="middle" font-family="Space Mono, monospace" font-size="10" fill="#948DA6">seu comando</text>
+        <text x="150" y="180" text-anchor="middle" font-family="Newsreader, serif" font-style="italic" font-size="16" fill="#C7C2D0">quando isto → roda aquilo</text>
       </svg>
     </div>
   </div>
   <div class="stats">
-    <div class="stat"><b>6</b><span>trilhas</span></div>
-    <div class="stat"><b>24</b><span>aulas</span></div>
-    <div class="stat"><b>~6h</b><span>de estudo</span></div>
+    <div class="stat"><b>4</b><span>trilhas</span></div>
+    <div class="stat"><b>17</b><span>aulas</span></div>
+    <div class="stat"><b>~2h30</b><span>de estudo</span></div>
     <div class="stat"><b>∞</b><span>revisão espaçada</span></div>
   </div>
 </div></header>
 
 <section id="percurso"><div class="wrap">
   <p class="eyebrow rv">O percurso</p>
-  <h2 class="rv">Seis trilhas, do <em>zero</em> ao profissional</h2>
+  <h2 class="rv">Do <em>primeiro</em> hook ao uso em equipe</h2>
   <div class="flow rv">
-    <span class="b">① Fundamentos</span><span class="ar">→</span>
-    <span class="b">② Fluxo</span><span class="ar">→</span>
-    <span class="b hot">③ Automação &amp; Hooks</span><span class="ar">→</span>
-    <span class="b">④ Agentes</span><span class="ar">→</span>
-    <span class="b">⑤ MCP</span><span class="ar">→</span>
-    <span class="b">⑥ Escala</span>
+    <span class="b hot">① Fundamentos</span><span class="ar">→</span>
+    <span class="b hot">② Guardrails</span><span class="ar">→</span>
+    <span class="b hot">③ Automação</span><span class="ar">→</span>
+    <span class="b hot">④ Equipe &amp; CI</span>
   </div>
 </div></section>
 
 <section id="trilhas"><div class="wrap">
   <p class="eyebrow rv">As trilhas</p>
-  <h2 class="rv">Escolha por <em>onde</em> entrar</h2>
-  <p class="sub rv">Cada trilha é independente e cresce em profundidade. A Trilha 3 já está aberta neste demo — leva até a aula real de hooks.</p>
+  <h2 class="rv">Quatro trilhas, <em>só</em> sobre hooks</h2>
+  <p class="sub rv">Cada trilha é independente e cresce em profundidade — e toda aula termina num "pratique agora" que você roda na sua máquina. Comece pelos Fundamentos ou pule pra onde a dor está.</p>
   <div class="trilhas">
-    <div class="tr rv" style="--hue:#6FA8FF"><p class="tn"><i>1</i> Trilha 01</p><h3>Fundamentos</h3><p>O que é o Claude Code, instalar, primeiro projeto e o loop planejar-editar-rodar.</p><p class="meta soon">4 aulas · em breve</p></div>
-    <div class="tr rv" style="--hue:#A98CFF"><p class="tn"><i>2</i> Trilha 02</p><h3>Fluxo de trabalho</h3><p>Prompts que funcionam, gerenciar contexto, sessões limpas e revisão de mudanças.</p><p class="meta soon">4 aulas · em breve</p></div>
-    <a class="tr live rv" href="curso.html#trilha" style="--hue:#7CE0C6"><p class="tn"><i>3</i> Trilha 03</p><h3>Automação &amp; Hooks</h3><p>Automatize regras: hooks, settings.json, travas de segurança e integração com CI.</p><p class="meta">5 aulas · ~48 min · abrir →</p></a>
-    <div class="tr rv" style="--hue:#F2B45C"><p class="tn"><i>4</i> Trilha 04</p><h3>Agentes &amp; subagentes</h3><p>Delegar tarefas, rodar em paralelo e orquestrar múltiplos agentes.</p><p class="meta soon">4 aulas · em breve</p></div>
-    <div class="tr rv" style="--hue:#5EC8C0"><p class="tn"><i>5</i> Trilha 05</p><h3>MCP &amp; integrações</h3><p>Conectar ferramentas externas via servidores MCP e estender o que o Claude alcança.</p><p class="meta soon">4 aulas · em breve</p></div>
-    <div class="tr rv" style="--hue:#FF8FA8"><p class="tn"><i>6</i> Trilha 06</p><h3>Escala &amp; produção</h3><p>Trabalho em equipe, padrões, automações de repositório e uso em produção.</p><p class="meta soon">3 aulas · em breve</p></div>
+    <a class="tr rv" href="curso.html#trilha" style="--hue:#7CE0C6"><p class="tn"><i>1</i> Trilha 01</p><h3>Fundamentos</h3><p>O que é um hook, os oito eventos do ciclo, o <code style="font-family:var(--mono);font-size:.85em">settings.json</code>, o que o hook recebe (JSON) e como ele responde (exit code + JSON).</p><p class="meta">5 aulas · ~45 min · abrir →</p></a>
+    <a class="tr rv" href="curso-guardrails.html#trilha" style="--hue:#F2B45C"><p class="tn"><i>2</i> Trilha 02</p><h3>Guardrails</h3><p>Travas de segurança: barrar o perigoso com <code style="font-family:var(--mono);font-size:.85em">exit 2</code>, ler o comando antes de rodar, casos reais e as decisões allow/ask/deny.</p><p class="meta">4 aulas · ~36 min · abrir →</p></a>
+    <a class="tr rv" href="curso-automacao.html#trilha" style="--hue:#6FA8FF"><p class="tn"><i>3</i> Trilha 03</p><h3>Automação</h3><p>Formatar ao salvar, avisar quando terminar, registrar os comandos e injetar contexto do projeto no começo da sessão.</p><p class="meta">4 aulas · ~36 min · abrir →</p></a>
+    <a class="tr rv" href="curso-time.html#trilha" style="--hue:#A98CFF"><p class="tn"><i>4</i> Trilha 04</p><h3>Equipe &amp; CI</h3><p>Versionar os hooks pro time, garantir determinismo, rodar em modo headless/pipeline e a higiene pra hook ser poder sem ser risco.</p><p class="meta">4 aulas · ~36 min · abrir →</p></a>
   </div>
 </div></section>
 
@@ -196,7 +193,7 @@
   <h2 class="rv">Feito pra <em>fixar</em>, não só pra ler</h2>
   <div class="grid3">
     <div class="feat rv"><h4><span>01</span> Leitura viva</h4><p>Uma ideia por seção, com uma figura na margem que acompanha o que você lê. Fisga sem cansar.</p></div>
-    <div class="feat rv"><h4><span>02</span> Teste-se</h4><p>Checagens rápidas ao longo da aula — você descobre na hora o que fixou e o que não.</p></div>
+    <div class="feat rv"><h4><span>02</span> Pratique agora</h4><p>Cada aula fecha com um hook real que você cola no seu projeto e vê rodar — não é só teoria.</p></div>
     <div class="feat rv"><h4><span>03</span> Flashcards dos seus grifos</h4><p>Grife um trecho e ele vira cartão automaticamente. Seu material de revisão se monta sozinho.</p></div>
     <div class="feat rv"><h4><span>04</span> Revisão espaçada</h4><p>Os cartões voltam na hora certa pra não esquecer. "Revisar hoje: N" te espera na jornada.</p></div>
   </div>
@@ -204,13 +201,13 @@
 
 <section class="final"><div class="wrap">
   <p class="eyebrow rv">Comece agora</p>
-  <h2 class="rv">Do primeiro comando ao <em>fluxo</em> de profissional.</h2>
-  <a class="btn pri rv" href="curso.html#trilha">Abrir a Trilha 03 · Automação &amp; Hooks →</a>
+  <h2 class="rv">Do primeiro hook ao <em>fluxo</em> automatizado.</h2>
+  <a class="btn pri rv" href="curso.html#trilha">Abrir a Trilha 01 · Fundamentos →</a>
 </div></section>
 
 <footer><div class="wrap">
   <p class="m">Aprender fazendo, e não esquecer.</p>
-  <p>Claude Code na prática · INEMA.CLUB PRO</p>
+  <p>Hooks do Claude Code · INEMA.CLUB PRO</p>
 </div></footer>
 
 <script>

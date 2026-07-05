@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="curso" content="v4hooks:curso">
-<title>Automação &amp; Hooks · Claude Code na prática · INEMA.CLUB PRO</title>
+<meta name="curso" content="cchooks:fund">
+<title>Fundamentos · Hooks do Claude Code · INEMA.CLUB PRO</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -59,7 +59,7 @@
 </head>
 <body>
 <div class="bar"><div class="bar-inner">
-  <span class="brand"><a class="mark" href="https://inema.club" target="_blank" rel="noopener">INEMA.CLUB</a><a class="pro" href="https://inema.pro" target="_blank" rel="noopener">PRO</a><a class="course" href="landing.html">Claude Code na prática</a></span>
+  <span class="brand"><a class="mark" href="https://inema.club" target="_blank" rel="noopener">INEMA.CLUB</a><a class="pro" href="https://inema.pro" target="_blank" rel="noopener">PRO</a><a class="course" href="landing.html">Hooks do Claude Code</a></span>
   <a class="back" href="#trilha" style="display:none">← trilha</a>
   <button id="pill" class="pill" style="display:none">0 lido</button>
   <button id="revbtn">revisar <span id="revn">0</span></button>
@@ -69,32 +69,30 @@
   <button id="themebtn">tema: escuro</button>
 </div>
 <div class="subnav"><div class="subnav-inner">
-  <a href="landing.html#trilhas" class="soon">01 Fundamentos</a>
-  <a href="landing.html#trilhas" class="soon">02 Fluxo</a>
-  <a href="#trilha" class="cur">03 Automação</a>
-  <a href="landing.html#trilhas" class="soon">04 Agentes</a>
-  <a href="landing.html#trilhas" class="soon">05 MCP</a>
-  <a href="landing.html#trilhas" class="soon">06 Escala</a>
+  <a href="curso.html#trilha" class="cur">01 Fundamentos</a>
+  <a href="curso-guardrails.html#trilha">02 Guardrails</a>
+  <a href="curso-automacao.html#trilha">03 Automação</a>
+  <a href="curso-time.html#trilha">04 Equipe &amp; CI</a>
 </div></div>
 </div>
 
 <!-- ===================== VIEW: TRILHA ===================== -->
 <section class="view" id="v-trilha">
   <header class="t-hero"><div class="wrap">
-    <p class="crumb"><a href="landing.html">Claude Code na prática</a> / Trilha 03</p>
-    <p class="kicker">Trilha 03 · Automação</p>
-    <h1>Automação &amp; <em>Hooks</em></h1>
-    <p class="lead">Faça o Claude Code seguir suas regras sozinho: hooks em cada momento, <code style="font-family:var(--mono);font-size:.8em;color:var(--accent)">settings.json</code>, travas de segurança e integração com CI.</p>
+    <p class="crumb"><a href="landing.html">Hooks do Claude Code</a> / Trilha 01</p>
+    <p class="kicker">Trilha 01 · Fundamentos</p>
+    <h1>Fundamentos dos <em>hooks</em></h1>
+    <p class="lead">O que é um hook, os eventos que disparam cada um, onde tudo mora no <code style="font-family:var(--mono);font-size:.8em;color:var(--accent)">settings.json</code>, o JSON que chega — e como seu hook decide o que responder.</p>
     <div class="statcards">
       <div class="sc"><b>5</b><span>aulas</span></div>
-      <div class="sc"><b>~48</b><span>minutos</span></div>
+      <div class="sc"><b>~45</b><span>minutos</span></div>
       <div class="sc"><b>iniciante</b><span>nível</span></div>
     </div>
   </div></header>
 
   <section><div class="wrap">
     <p class="eyebrow">Aulas desta trilha</p>
-    <h2>Do <em>primeiro</em> hook à automação completa</h2>
+    <h2>Da <em>ideia</em> ao hook que já responde</h2>
     <div class="aulas">
 
       <a class="au on" data-aula="1" href="#aula-1">
@@ -120,18 +118,18 @@
       <a class="au on" data-aula="3" href="#aula-3">
         <div class="num">3</div>
         <div>
-          <h3>Hooks que protegem</h3>
-          <p>Travas com <code style="font-family:var(--mono);font-size:.8em">exit 2</code>, ler o comando, casos reais e pedir confirmação.</p>
+          <h3>Os eventos, um por um</h3>
+          <p>O ciclo completo de uma tarefa, os eventos que existem e quem, entre eles, pode barrar de verdade.</p>
           <div class="prog"><i></i></div>
         </div>
-        <div class="meta">4 seções · abrir →</div>
+        <div class="meta">5 seções · abrir →</div>
       </a>
 
       <a class="au on" data-aula="4" href="#aula-4">
         <div class="num">4</div>
         <div>
-          <h3>Formatar, notificar, logar</h3>
-          <p>Quatro receitas prontas: formatador ao salvar, aviso ao terminar, log de comandos e contexto no início.</p>
+          <h3>O que o hook recebe</h3>
+          <p>O JSON que chega pelo stdin: os campos comuns, tool_input/tool_response e como ler com jq.</p>
           <div class="prog"><i></i></div>
         </div>
         <div class="meta">4 seções · abrir →</div>
@@ -140,8 +138,8 @@
       <a class="au on" data-aula="5" href="#aula-5">
         <div class="num">5</div>
         <div>
-          <h3>Hooks em equipe e CI</h3>
-          <p>Versionar pro time, determinismo, modo headless em pipeline e a higiene pra não se machucar.</p>
+          <h3>Como o hook responde</h3>
+          <p>Exit code ou JSON: decision, reason, e o permissionDecision que pede confirmação em vez de barrar.</p>
           <div class="prog"><i></i></div>
         </div>
         <div class="meta">4 seções · abrir →</div>
@@ -150,19 +148,19 @@
     </div>
 
     <div class="nav">
-      <a class="dis" href="#">← Trilha 02</a>
-      <a class="dis" href="#">Trilha 04 · Agentes →</a>
+      <a class="dis" href="#">← início</a>
+      <a href="curso-guardrails.html#trilha">Trilha 02 · Guardrails →</a>
     </div>
   </div></section>
 
-  <footer><div class="wrap">Trilha 03 · Automação &amp; Hooks · INEMA.CLUB PRO</div></footer>
+  <footer><div class="wrap">Trilha 01 · Fundamentos · INEMA.CLUB PRO</div></footer>
 </section>
 
 <!-- ===================== VIEW: AULA 1 ===================== -->
 <section class="view" id="v-aula-1" data-aula="1">
 <header class="hero"><div class="hero-inner">
   <div>
-    <p class="kicker">Trilha 03 · Aula 1 · Iniciante</p>
+    <p class="kicker">Trilha 01 · Aula 1 · Iniciante</p>
     <h1>Hooks:<br>o <em>essencial</em></h1>
     <p class="lead">Um hook é uma ordem automática: "toda vez que acontecer isto, rode aquilo". É como o Claude Code segue suas regras sozinho — sem depender de lembrar.</p>
     <p class="cue"><span class="arw">↓</span> role para estudar</p>
@@ -368,7 +366,7 @@ exit 0</pre>
 </div>
 
 <nav class="lnav"><a href="#trilha">← trilha</a><a href="#aula-2">Aula 2 · settings.json a fundo →</a></nav>
-<footer>Aula 1 de 5 · Trilha 03 · Automação &amp; Hooks · INEMA.CLUB PRO</footer>
+<footer>Aula 1 de 5 · Trilha 01 · Fundamentos · INEMA.CLUB PRO</footer>
 
 <script type="application/json" id="cards-1">
 [
@@ -386,7 +384,7 @@ exit 0</pre>
 <section class="view" id="v-aula-2" data-aula="2">
 <header class="hero"><div class="hero-inner">
   <div>
-    <p class="kicker">Trilha 03 · Aula 2 · Iniciante</p>
+    <p class="kicker">Trilha 01 · Aula 2 · Iniciante</p>
     <h1>settings.json<br><em>a fundo</em></h1>
     <p class="lead">Onde os hooks moram, como cada um é montado, e o que o Claude entrega pro seu comando na hora de rodar.</p>
     <p class="cue"><span class="arw">↓</span> role para estudar</p>
@@ -479,7 +477,7 @@ file=$(jq -r '.tool_input.file_path')</pre>
       <div class="mobfig" data-mobfig="4"></div>
       <details>
         <summary>Indo mais fundo</summary>
-        <p>O JSON traz mais campos (<code>session_id</code>, <code>cwd</code>, <code>hook_event_name</code>…). Você raramente precisa de todos — <code>tool_name</code> e <code>tool_input</code> resolvem a maioria dos hooks.</p>
+        <p>O JSON traz mais campos (<code>session_id</code>, <code>cwd</code>, <code>hook_event_name</code>…). Você raramente precisa de todos — <code>tool_name</code> e <code>tool_input</code> resolvem a maioria dos hooks. A Aula 4 desta trilha destrincha esse JSON campo a campo.</p>
       </details>
       <button class="readbtn" data-read="s4">marcar como lido</button>
     </section>
@@ -556,8 +554,8 @@ file=$(jq -r '.tool_input.file_path')</pre>
   </div></aside>
 </div>
 
-<nav class="lnav"><a href="#aula-1">← Aula 1</a><a href="#aula-3">Aula 3 · Hooks que protegem →</a></nav>
-<footer>Aula 2 de 5 · Trilha 03 · Automação &amp; Hooks · INEMA.CLUB PRO</footer>
+<nav class="lnav"><a href="#aula-1">← Aula 1</a><a href="#aula-3">Aula 3 · Os eventos, um por um →</a></nav>
+<footer>Aula 2 de 5 · Trilha 01 · Fundamentos · INEMA.CLUB PRO</footer>
 
 <script type="application/json" id="cards-2">
 [
@@ -574,16 +572,20 @@ file=$(jq -r '.tool_input.file_path')</pre>
 <section class="view" id="v-aula-3" data-aula="3">
 <header class="hero"><div class="hero-inner">
   <div>
-    <p class="kicker">Trilha 03 · Aula 3 · Iniciante</p>
-    <h1>Hooks que<br><em>protegem</em></h1>
-    <p class="lead">Transformar "por favor não faça isso" numa trava de verdade: barrar o perigoso antes de acontecer, ou pedir confirmação.</p>
+    <p class="kicker">Trilha 01 · Aula 3 · Iniciante</p>
+    <h1>Os eventos,<br>um <em>por um</em></h1>
+    <p class="lead">Do começo da sessão ao fim de uma tarefa: os momentos em que um hook pode ganchar — e quais deles, de verdade, conseguem barrar alguma coisa.</p>
     <p class="cue"><span class="arw">↓</span> role para estudar</p>
   </div>
   <div class="herofig">
     <svg viewBox="0 0 300 240" fill="none" aria-hidden="true">
-      <path d="M150 40 l70 26 v40 c0 44 -30 74 -70 88 c-40 -14 -70 -44 -70 -88 v-40 z" fill="#15131d" stroke="#37324a" stroke-width="1.5"/>
-      <path class="pulse" d="M124 130 l18 18 l34 -40" stroke="#7CE0C6" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-      <text x="150" y="216" text-anchor="middle" font-family="Newsreader, serif" font-style="italic" font-size="15" fill="#C7C2D0">a regra vira trava</text>
+      <line x1="20" y1="120" x2="280" y2="120" stroke="#37324a" stroke-width="1.5"/>
+      <circle cx="30" cy="120" r="5" fill="#948DA6"/><text x="30" y="142" text-anchor="middle" font-family="Space Mono, monospace" font-size="9" fill="#948DA6">start</text>
+      <circle class="breathe" cx="95" cy="120" r="5" fill="#7CE0C6"/><text x="95" y="104" text-anchor="middle" font-family="Space Mono, monospace" font-size="9" fill="#7CE0C6">prompt</text>
+      <circle class="breathe" cx="160" cy="120" r="5" fill="#7CE0C6" style="animation-delay:.3s"/><text x="160" y="142" text-anchor="middle" font-family="Space Mono, monospace" font-size="9" fill="#7CE0C6">pre·tool·post</text>
+      <circle class="breathe" cx="230" cy="120" r="5" fill="#F2B45C" style="animation-delay:.6s"/><text x="230" y="104" text-anchor="middle" font-family="Space Mono, monospace" font-size="9" fill="#F2B45C">stop</text>
+      <circle cx="270" cy="120" r="5" fill="#948DA6"/><text x="270" y="142" text-anchor="middle" font-family="Space Mono, monospace" font-size="9" fill="#948DA6">end</text>
+      <text x="150" y="200" text-anchor="middle" font-family="Newsreader, serif" font-style="italic" font-size="16" fill="#C7C2D0">janelas pra ganchar, uma a uma</text>
     </svg>
   </div>
 </div></header>
@@ -591,133 +593,159 @@ file=$(jq -r '.tool_input.file_path')</pre>
 <div class="layout">
   <div class="col">
     <section class="step" data-fig="1">
-      <h2><span class="n">01</span> A ideia de trava</h2>
-      <p>Uma trava é um hook de <code>PreToolUse</code>: ele roda <b>antes</b> da ferramenta e decide se ela pode seguir. O sinal é o <b>código de saída</b>:</p>
-      <ul>
-        <li><b>exit 0</b> — tudo bem, pode rodar.</li>
-        <li><b>exit 2</b> — <b>barra</b>. O Claude não executa, e o que você imprimiu no <code>stderr</code> vira o motivo.</li>
-      </ul>
-      <p>Repare: a trava não "avisa depois" — ela <b>impede antes</b>. É a diferença entre um extintor e um relatório de incêndio.</p>
+      <h2><span class="n">01</span> O ciclo de uma tarefa (linha do tempo)</h2>
+      <p>Uma sessão do Claude Code tem um ciclo de vida, e cada volta dele abre uma janela pra um hook. Em ordem: a sessão <b>começa</b>, você <b>envia uma mensagem</b>, o Claude eventualmente <b>usa ferramentas</b> (uma de cada vez, antes e depois de cada uma), ele <b>termina</b> de responder, e — mais cedo ou mais tarde — a sessão <b>acaba</b>.</p>
+      <p>Pensar nos hooks como pontos numa <b>linha do tempo</b> ajuda mais do que decorar nomes soltos: cada evento é só "isto aconteceu agora" — e o resto da aula é ver, um por um, o que cada ponto permite fazer.</p>
       <div class="mobfig" data-mobfig="1"></div>
-      <div class="quiz" data-answer="c">
-        <p class="qk">Teste-se</p>
-        <p class="q">Qual código de saída BARRA a ação no PreToolUse?</p>
-        <button class="opt" data-k="a">exit 0</button>
-        <button class="opt" data-k="b">exit 1</button>
-        <button class="opt" data-k="c" data-fb="No PreToolUse, exit 2 barra a ação antes de rodar; exit 0 deixa seguir.">exit 2</button>
-        <p class="qfb"></p>
-      </div>
       <button class="readbtn" data-read="s1">marcar como lido</button>
     </section>
 
     <section class="step" data-fig="2">
-      <h2><span class="n">02</span> Ler o que vai rodar</h2>
-      <p>Pra decidir, o hook precisa <b>ver o comando</b>. Ele vem no JSON do stdin; você pega com <code>jq</code> e testa:</p>
-      <pre><span class="c"># .claude/hooks/guarda.sh (PreToolUse, matcher "Bash")</span>
-cmd=$(jq -r '.tool_input.command')
-if echo "$cmd" | grep -qE 'rm -rf|:(){:'; then
-  echo "bloqueado: comando destrutivo" &gt;&amp;2
-  exit 2
-fi
-exit 0</pre>
-      <p>A régua é sua: um <code>grep</code> por padrões perigosos já pega a maioria dos acidentes. Comece simples e vá endurecendo conforme aprende o que te morde.</p>
+      <h2><span class="n">02</span> Antes e depois da ferramenta</h2>
+      <p>Toda vez que o Claude usa uma ferramenta — Bash, Edit, Write, o que for — dois eventos a cercam:</p>
+      <ul>
+        <li><b class="gterm" tabindex="0" data-def="Dispara antes de QUALQUER ferramenta executar. Pode bloquear saindo com exit 2. Só recebe tool_name e tool_input — a ferramenta ainda não rodou.">PreToolUse</b> — dispara <b>antes</b> de qualquer ferramenta rodar. Pode bloquear (exit 2); só recebe <code>tool_name</code> e <code>tool_input</code>, porque a ferramenta ainda não rodou.</li>
+        <li><b class="gterm" tabindex="0" data-def="Dispara depois que a ferramenta completa com sucesso. Um exit 2 aqui não bloqueia mais nada — a ferramenta já rodou. Pode ajustar a saída (ex.: formatar).">PostToolUse</b> — dispara <b>depois</b> que a ferramenta terminou com sucesso. Já recebe também o <code>tool_response</code> (o resultado). Um exit 2 aqui <b>não bloqueia</b> — a ferramenta já rodou.</li>
+      </ul>
+      <p>É a mesma ferramenta, mas dois momentos com poderes diferentes: o Pre decide <i>se</i> roda; o Post reage a <i>o que</i> rodou.</p>
       <div class="mobfig" data-mobfig="2"></div>
+      <div class="quiz" data-answer="a">
+        <p class="qk">Teste-se</p>
+        <p class="q">Por que só o PreToolUse consegue impedir uma ferramenta de rodar?</p>
+        <button class="opt" data-k="a" data-fb="Exatamente: o Post já roda depois que a ferramenta terminou. Nesse ponto não tem mais como impedir — só reagir ao resultado.">porque ele dispara antes; o PostToolUse só roda depois que a ferramenta já terminou</button>
+        <button class="opt" data-k="b">porque o Post não existe de verdade</button>
+        <button class="opt" data-k="c">os dois conseguem igual, só muda o nome</button>
+        <p class="qfb"></p>
+      </div>
       <button class="readbtn" data-read="s2">marcar como lido</button>
     </section>
 
     <section class="step" data-fig="3">
-      <h2><span class="n">03</span> Casos que valem a pena</h2>
-      <p>Três travas que salvam o dia mais cedo do que tarde:</p>
+      <h2><span class="n">03</span> Você fala, o Claude para</h2>
+      <p>Nem todo evento é sobre ferramenta. Alguns marcam o vaivém da conversa:</p>
       <ul>
-        <li><b>Nada de <code>rm -rf</code></b> em caminhos amplos — o clássico acidente irreversível.</li>
-        <li><b>Não tocar em segredos</b> — barrar edição de <code>.env</code>, <code>*.pem</code>, chaves.</li>
-        <li><b>Não empurrar na <code>main</code></b> — barrar <code>git push</code> direto no branch protegido.</li>
+        <li><b class="gterm" tabindex="0" data-def="Dispara quando você envia uma mensagem, antes de o Claude processá-la. Bom pra injetar contexto extra ou registrar o que foi pedido.">UserPromptSubmit</b> — dispara quando <i>você</i> envia uma mensagem.</li>
+        <li><b class="gterm" tabindex="0" data-def="Dispara quando o Claude termina um turno. É um dos dois únicos eventos que bloqueiam de verdade (exit 2) — útil pra obrigar uma checagem antes de encerrar.">Stop</b> — dispara quando o Claude <b>termina um turno</b>. Também pode bloquear com exit 2 — não pra travar uma ferramenta, mas pra obrigar o Claude a continuar (ex.: "ainda falta atualizar o PLAN.md").</li>
+        <li><b class="gterm" tabindex="0" data-def="Versão do Stop para quando é um subagente (não a conversa principal) que termina seu turno. Não bloqueia.">SubagentStop</b> — o mesmo que Stop, mas para quando é um <b>subagente</b> que termina. Não bloqueia.</li>
       </ul>
-      <p>Não precisa prever tudo. Cada susto vira uma linha nova na trava — e ela fica mais esperta com o tempo.</p>
+      <p>Repare a assimetria: <code>Stop</code> é uma das duas portas que realmente travam (a outra é o <code>PreToolUse</code>); <code>UserPromptSubmit</code> e <code>SubagentStop</code> não bloqueiam — eles observam ou injetam contexto.</p>
       <div class="mobfig" data-mobfig="3"></div>
       <div class="quiz" data-answer="b">
         <p class="qk">Teste-se</p>
-        <p class="q">Onde o hook lê o comando que o Bash ia rodar?</p>
-        <button class="opt" data-k="a">numa variável de ambiente $COMMAND</button>
-        <button class="opt" data-k="b" data-fb="O comando chega no JSON do stdin; você lê com jq. Não é variável de ambiente nem o settings.json.">no JSON do stdin (ex.: .tool_input.command)</button>
-        <button class="opt" data-k="c">no arquivo settings.json</button>
+        <p class="q">Qual evento dispara quando VOCÊ envia uma mensagem, antes de o Claude processá-la?</p>
+        <button class="opt" data-k="a">Stop</button>
+        <button class="opt" data-k="b" data-fb="UserPromptSubmit é o gancho no envio da sua mensagem. Stop é quando o Claude termina de responder — o oposto.">UserPromptSubmit</button>
+        <button class="opt" data-k="c">SubagentStop</button>
         <p class="qfb"></p>
       </div>
       <button class="readbtn" data-read="s3">marcar como lido</button>
     </section>
 
     <section class="step" data-fig="4">
-      <h2><span class="n">04</span> Pedir confirmação, não só barrar</h2>
-      <p>Nem tudo é preto no branco. Às vezes você não quer <b>proibir</b>, quer <b>ser avisado</b> pra confirmar. Em vez do <code>exit 2</code>, o hook pode devolver um <b>JSON</b> pedindo confirmação:</p>
-      <pre>{ "hookSpecificOutput": {
-    "hookEventName": "PreToolUse",
-    "permissionDecision": "ask",
-    "permissionDecisionReason": "confirmar antes de deploy" } }</pre>
-      <p>Assim o Claude pausa e pergunta. Três posturas: <code>allow</code> (libera), <code>deny</code> (barra, como o exit 2) e <code>ask</code> (confirma). Use <b>ask</b> quando o certo depende do contexto.</p>
+      <h2><span class="n">04</span> Sessão e manutenção</h2>
+      <p>Os últimos quatro cuidam do entorno da sessão, não de uma ferramenta ou mensagem específica:</p>
+      <ul>
+        <li><b class="gterm" tabindex="0" data-def="Dispara quando a sessão começa. Sem matcher. O que ele imprime pode virar contexto injetado pro Claude — ótimo pra estado do projeto.">SessionStart</b> — quando a sessão <b>começa</b>. Sem matcher; ótimo pra injetar contexto (branch, commits, regras).</li>
+        <li><b class="gterm" tabindex="0" data-def="Dispara quando a sessão termina normalmente. Sem matcher, não bloqueia, não modifica nada — serve pra limpeza, métricas, arquivamento.">SessionEnd</b> — quando a sessão <b>termina</b> normalmente. Não bloqueia, não modifica nada — serve pra limpeza, métricas, arquivar algo.</li>
+        <li><b class="gterm" tabindex="0" data-def="Dispara antes de o histórico da conversa ser compactado (resumido). É o evento menos documentado oficialmente — trate com cautela, sem depender de detalhes finos do seu comportamento.">PreCompact</b> — antes de o histórico da conversa ser <b>compactado</b> (resumido pra caber no contexto). É o evento menos documentado — dá pra usar pra guardar algo antes da compactação, mas sem contar com detalhes finos.</li>
+        <li><b class="gterm" tabindex="0" data-def="Dispara quando o Claude precisa da sua atenção: ficou 60s+ parado, pede permissão, ou um MCP pede uma escolha. Tem matcher (permission_prompt, idle_prompt, auth_success, elicitation_dialog) e pode customizar a mensagem mostrada.">Notification</b> — quando o Claude <b>precisa de você</b> (ficou parado, pede permissão, um MCP pergunta algo). Único desse grupo com <b>matcher</b> (<code>permission_prompt</code>, <code>idle_prompt</code>, <code>auth_success</code>, <code>elicitation_dialog</code>) — e pode até customizar a mensagem mostrada.</li>
+      </ul>
       <div class="mobfig" data-mobfig="4"></div>
       <details>
         <summary>Indo mais fundo</summary>
-        <p>O <code>exit 2</code> é o caminho rápido; a saída JSON é a versão fina, com motivo estruturado. Comece pelo exit code — migre pro JSON quando precisar de "ask" ou mensagens mais ricas.</p>
+        <p><code>SubagentStop</code> e <code>PreCompact</code> são os dois eventos com documentação oficial mais incompleta — funcionam, mas espere menos previsibilidade fina do que em <code>PreToolUse</code> ou <code>Stop</code>. Teste sempre antes de confiar algo crítico a eles.</p>
       </details>
       <button class="readbtn" data-read="s4">marcar como lido</button>
     </section>
 
+    <section class="step" data-fig="5">
+      <h2><span class="n">05</span> Quem pode barrar</h2>
+      <p>Com oito nomes na cabeça, fica fácil achar que qualquer um deles trava alguma coisa saindo com <code>exit 2</code>. Não é assim:</p>
+      <ul>
+        <li><b>PreToolUse</b> — exit 2 <b>barra a ferramenta</b> antes dela rodar.</li>
+        <li><b>Stop</b> — exit 2 <b>barra o fim do turno</b> (obriga o Claude a continuar).</li>
+        <li><b>Todos os outros</b> — PostToolUse, Notification, SessionStart, SessionEnd, SubagentStop, PreCompact, UserPromptSubmit — um exit diferente de 0 é só <b>erro não-bloqueante</b>: a ação segue normalmente (fail-open). No PostToolUse em especial, nem faria sentido bloquear: a ferramenta <b>já rodou</b>.</li>
+      </ul>
+      <p>Guarde essa regra: <b>só Pre e Stop travam de verdade</b>. Isso evita a armadilha de escrever uma trava num evento que nunca vai impedir nada.</p>
+      <div class="mobfig" data-mobfig="5"></div>
+      <div class="quiz" data-answer="c">
+        <p class="qk">Teste-se</p>
+        <p class="q">Um hook <code>PostToolUse</code> sai com <code>exit 2</code>. O que acontece?</p>
+        <button class="opt" data-k="a">a ferramenta é desfeita</button>
+        <button class="opt" data-k="b">a sessão inteira é encerrada</button>
+        <button class="opt" data-k="c" data-fb="Só PreToolUse e Stop bloqueiam com exit 2. No PostToolUse a ferramenta já rodou — exit 2 vira só um erro não-bloqueante.">nada é bloqueado — a ferramenta já rodou; é tratado como erro não-bloqueante</button>
+        <p class="qfb"></p>
+      </div>
+      <button class="readbtn" data-read="s5">marcar como lido</button>
+    </section>
+
     <section class="practice" data-practice="p3">
       <p class="pk">Pratique agora <span class="pcount">0/4 feito</span></p>
-      <h3 class="ph">Sua primeira trava</h3>
-      <p class="pgoal">Faça um hook <b>barrar um comando de verdade</b> — testando com um token inofensivo, sem chegar perto de um <code>rm -rf</code>.</p>
+      <h3 class="ph">Um SessionStart que avisa data e branch</h3>
+      <p class="pgoal">Faça a sessão imprimir onde e quando ela começou — a primeira coisa que roda, antes de qualquer ferramenta. ~5 min, seguro (só observa).</p>
       <div class="pcodewrap"><button class="pcopy" type="button">copiar</button><pre class="pcode">{
   <span class="k">"hooks"</span>: {
-    <span class="k">"PreToolUse"</span>: [
+    <span class="k">"SessionStart"</span>: [
       {
-        <span class="k">"matcher"</span>: "Bash",
         <span class="k">"hooks"</span>: [
-          { "type": "command",
-            "command": "grep -q BLOQUEIATESTE &amp;&amp; { echo 'trava: comando de teste barrado' &gt;&amp;2; exit 2; }; exit 0" }
+          { "type": "command", "command": "{ date; echo branch: $(git branch --show-current); } &gt;&gt; .claude/session.log" }
         ]
       }
     ]
   }
 }</pre></div>
       <ol class="psteps">
-        <li><label><input type="checkbox" data-ptask="1"> Ponha o bloco no <code>.claude/settings.json</code> e salve.</label></li>
-        <li><label><input type="checkbox" data-ptask="2"> Peça ao Claude pra rodar <code>echo BLOQUEIATESTE</code>.</label></li>
-        <li><label><input type="checkbox" data-ptask="3"> Veja o Claude ser <b>barrado</b> com o seu motivo ("trava: comando de teste barrado").</label></li>
-        <li><label><input type="checkbox" data-ptask="4"> Troque <code>BLOQUEIATESTE</code> pelo padrão que você quer travar de verdade.</label></li>
+        <li><label><input type="checkbox" data-ptask="1"> Cole o bloco no <code>.claude/settings.json</code> e salve.</label></li>
+        <li><label><input type="checkbox" data-ptask="2"> Abra uma sessão nova do Claude Code neste projeto (ou rode <code>claude</code> de novo).</label></li>
+        <li><label><input type="checkbox" data-ptask="3"> Rode <code>cat .claude/session.log</code> — apareceu a data e o branch?</label></li>
+        <li><label><input type="checkbox" data-ptask="4"> Troque de branch e abra outra sessão — o log cresce com o branch novo.</label></li>
       </ol>
-      <p class="pdone">✓ Você transformou uma regra em <b>trava real</b>: foi barrado antes de rodar, não é sugestão que o modelo pode ignorar.</p>
+      <p class="pdone">✓ SessionStart é a primeira janela do ciclo — sem matcher, sem depender de ferramenta nenhuma. É o lugar certo pra qualquer contexto que o Claude devia saber desde o primeiro segundo.</p>
     </section>
   </div>
 
   <aside class="rail"><div class="railsticky">
     <div class="figstage">
-      <div class="fig on" data-fig="1" data-cap="<b>Fig.</b> exit 0 segue · exit 2 barra">
+      <div class="fig on" data-fig="1" data-cap="<b>Fig.</b> start → prompt → pre·tool·post → stop → end">
         <svg viewBox="0 0 220 200" fill="none" aria-hidden="true">
-          <rect x="40" y="46" width="140" height="34" rx="8" fill="none" stroke="#7CE0C6"/><text x="54" y="68" font-family="Space Mono" font-size="11" fill="#7CE0C6">exit 0 → segue</text>
-          <rect class="breathe" x="40" y="112" width="140" height="34" rx="8" fill="none" stroke="#F2B45C"/><text x="54" y="134" font-family="Space Mono" font-size="11" fill="#F2B45C">exit 2 → barra</text>
+          <line x1="18" y1="100" x2="202" y2="100" stroke="#37324a" stroke-width="1.5"/>
+          <circle cx="26" cy="100" r="4" fill="#948DA6"/><text x="26" y="122" text-anchor="middle" font-family="Space Mono" font-size="8" fill="#948DA6">start</text>
+          <circle class="breathe" cx="72" cy="100" r="4" fill="#7CE0C6"/><text x="72" y="84" text-anchor="middle" font-family="Space Mono" font-size="8" fill="#7CE0C6">prompt</text>
+          <circle class="breathe" cx="120" cy="100" r="4" fill="#7CE0C6" style="animation-delay:.3s"/><text x="120" y="122" text-anchor="middle" font-family="Space Mono" font-size="7" fill="#7CE0C6">pre·tool·post</text>
+          <circle class="breathe" cx="168" cy="100" r="4" fill="#F2B45C" style="animation-delay:.6s"/><text x="168" y="84" text-anchor="middle" font-family="Space Mono" font-size="8" fill="#F2B45C">stop</text>
+          <circle cx="196" cy="100" r="4" fill="#948DA6"/><text x="196" y="122" text-anchor="middle" font-family="Space Mono" font-size="8" fill="#948DA6">end</text>
         </svg>
       </div>
-      <div class="fig" data-fig="2" data-cap="<b>Fig.</b> stdin → jq → grep padrão perigoso">
+      <div class="fig" data-fig="2" data-cap="<b>Fig.</b> Pre decide se roda · Post reage ao que rodou">
         <svg viewBox="0 0 220 200" fill="none" aria-hidden="true">
-          <rect x="20" y="80" width="52" height="40" rx="8" fill="#15131d" stroke="#37324a"/><text x="46" y="104" text-anchor="middle" font-family="Space Mono" font-size="9" fill="#948DA6">stdin</text>
-          <path class="breathe" d="M76 100 H104" stroke="#7CE0C6" stroke-width="2"/><path d="M104 94 l9 6 -9 6z" fill="#7CE0C6"/>
-          <rect x="116" y="80" width="40" height="40" rx="8" fill="#221f2e" stroke="#37324a"/><text x="136" y="104" text-anchor="middle" font-family="Space Mono" font-size="10" fill="#7CE0C6">jq</text>
-          <path class="breathe" d="M160 100 H184" stroke="#7CE0C6" stroke-width="2" style="animation-delay:.4s"/><path d="M184 94 l9 6 -9 6z" fill="#7CE0C6"/>
-          <text x="200" y="104" text-anchor="middle" font-family="Space Mono" font-size="10" fill="#F2B45C">grep</text>
+          <circle class="breathe" cx="50" cy="100" r="20" fill="none" stroke="#7CE0C6"/><text x="50" y="104" text-anchor="middle" font-family="Space Mono" font-size="9" fill="#7CE0C6">Pre</text>
+          <rect x="86" y="82" width="48" height="36" rx="8" fill="#221f2e" stroke="#37324a"/><text x="110" y="105" text-anchor="middle" font-family="Space Mono" font-size="9" fill="#C7C2D0">tool</text>
+          <circle class="breathe" cx="170" cy="100" r="20" fill="none" stroke="#7CE0C6" style="animation-delay:.4s"/><text x="170" y="104" text-anchor="middle" font-family="Space Mono" font-size="8" fill="#7CE0C6">Post</text>
+          <path d="M70 100 H86 M134 100 H150" stroke="#37324a" stroke-width="2"/>
         </svg>
       </div>
-      <div class="fig" data-fig="3" data-cap="<b>Fig.</b> rm -rf · .env · push main">
+      <div class="fig" data-fig="3" data-cap="<b>Fig.</b> UserPromptSubmit fala · Stop/SubagentStop param">
         <svg viewBox="0 0 220 200" fill="none" aria-hidden="true">
-          <rect class="breathe" x="40" y="36" width="140" height="30" rx="8" fill="none" stroke="#F2B45C"/><text x="110" y="56" text-anchor="middle" font-family="Space Mono" font-size="10" fill="#F2B45C">rm -rf</text>
-          <rect class="breathe" x="40" y="80" width="140" height="30" rx="8" fill="none" stroke="#F2B45C" style="animation-delay:.3s"/><text x="110" y="100" text-anchor="middle" font-family="Space Mono" font-size="10" fill="#F2B45C">.env / *.pem</text>
-          <rect class="breathe" x="40" y="124" width="140" height="30" rx="8" fill="none" stroke="#F2B45C" style="animation-delay:.6s"/><text x="110" y="144" text-anchor="middle" font-family="Space Mono" font-size="10" fill="#F2B45C">push → main</text>
+          <rect class="breathe" x="30" y="40" width="160" height="30" rx="8" fill="none" stroke="#7CE0C6"/><text x="110" y="60" text-anchor="middle" font-family="Space Mono" font-size="10" fill="#7CE0C6">UserPromptSubmit</text>
+          <rect class="breathe" x="30" y="84" width="160" height="30" rx="8" fill="none" stroke="#F2B45C" style="animation-delay:.3s"/><text x="110" y="104" text-anchor="middle" font-family="Space Mono" font-size="10" fill="#F2B45C">Stop</text>
+          <rect class="breathe" x="30" y="128" width="160" height="30" rx="8" fill="none" stroke="#948DA6" style="animation-delay:.6s"/><text x="110" y="148" text-anchor="middle" font-family="Space Mono" font-size="10" fill="#948DA6">SubagentStop</text>
         </svg>
       </div>
-      <div class="fig" data-fig="4" data-cap="<b>Fig.</b> allow · deny · ask">
+      <div class="fig" data-fig="4" data-cap="<b>Fig.</b> SessionStart · SessionEnd · PreCompact · Notification">
         <svg viewBox="0 0 220 200" fill="none" aria-hidden="true">
-          <circle cx="60" cy="100" r="26" fill="none" stroke="#7CE0C6"/><text x="60" y="104" text-anchor="middle" font-family="Space Mono" font-size="9" fill="#7CE0C6">allow</text>
-          <circle cx="130" cy="100" r="26" fill="none" stroke="#F2B45C"/><text x="130" y="104" text-anchor="middle" font-family="Space Mono" font-size="9" fill="#F2B45C">deny</text>
-          <circle class="breathe" cx="185" cy="60" r="18" fill="none" stroke="#C7C2D0"/><text x="185" y="64" text-anchor="middle" font-family="Space Mono" font-size="9" fill="#C7C2D0">ask</text>
+          <rect class="breathe" x="20" y="24" width="86" height="30" rx="7" fill="none" stroke="#7CE0C6"/><text x="63" y="44" text-anchor="middle" font-family="Space Mono" font-size="8" fill="#7CE0C6">SessionStart</text>
+          <rect class="breathe" x="114" y="24" width="86" height="30" rx="7" fill="none" stroke="#948DA6" style="animation-delay:.2s"/><text x="157" y="44" text-anchor="middle" font-family="Space Mono" font-size="8" fill="#948DA6">SessionEnd</text>
+          <rect class="breathe" x="20" y="66" width="86" height="30" rx="7" fill="none" stroke="#C7C2D0" style="animation-delay:.4s"/><text x="63" y="86" text-anchor="middle" font-family="Space Mono" font-size="8" fill="#C7C2D0">PreCompact</text>
+          <rect class="breathe" x="114" y="66" width="86" height="30" rx="7" fill="none" stroke="#F2B45C" style="animation-delay:.6s"/><text x="157" y="86" text-anchor="middle" font-family="Space Mono" font-size="8" fill="#F2B45C">Notification</text>
+        </svg>
+      </div>
+      <div class="fig" data-fig="5" data-cap="<b>Fig.</b> só Pre e Stop travam de verdade">
+        <svg viewBox="0 0 220 200" fill="none" aria-hidden="true">
+          <rect class="breathe" x="30" y="30" width="70" height="30" rx="7" fill="none" stroke="#F2B45C"/><text x="65" y="50" text-anchor="middle" font-family="Space Mono" font-size="9" fill="#F2B45C">Pre</text>
+          <rect class="breathe" x="120" y="30" width="70" height="30" rx="7" fill="none" stroke="#F2B45C" style="animation-delay:.3s"/><text x="155" y="50" text-anchor="middle" font-family="Space Mono" font-size="9" fill="#F2B45C">Stop</text>
+          <text x="110" y="84" text-anchor="middle" font-family="Space Mono" font-size="9" fill="#7CE0C6">travam (exit 2)</text>
+          <line x1="20" y1="120" x2="200" y2="120" stroke="#37324a" stroke-width="1"/>
+          <text x="110" y="150" text-anchor="middle" font-family="Space Mono" font-size="9" fill="#6C6580">os outros seis: nunca travam</text>
         </svg>
       </div>
     </div>
@@ -727,15 +755,17 @@ exit 0</pre>
   </div></aside>
 </div>
 
-<nav class="lnav"><a href="#aula-2">← Aula 2</a><a href="#aula-4">Aula 4 · Formatar, notificar, logar →</a></nav>
-<footer>Aula 3 de 5 · Trilha 03 · Automação &amp; Hooks · INEMA.CLUB PRO</footer>
+<nav class="lnav"><a href="#aula-2">← Aula 2</a><a href="#aula-4">Aula 4 · O que o hook recebe →</a></nav>
+<footer>Aula 3 de 5 · Trilha 01 · Fundamentos · INEMA.CLUB PRO</footer>
 
 <script type="application/json" id="cards-3">
 [
-  {"front":"Que evento se usa para uma trava (bloquear antes de rodar)?","back":"PreToolUse — roda antes da ferramenta e pode barrar."},
-  {"front":"O que exit 0 e exit 2 significam numa trava?","back":"exit 0 = pode seguir; exit 2 = barra, e o stderr vira o motivo."},
-  {"front":"Como o hook vê o comando que o Bash ia rodar?","back":"No JSON do stdin: jq -r '.tool_input.command'."},
-  {"front":"Além de barrar, o que um PreToolUse pode fazer?","back":"Pedir confirmação via JSON com permissionDecision: ask (allow/deny/ask)."}
+  {"front":"Qual evento dispara ANTES de qualquer ferramenta executar?","back":"PreToolUse — e é um dos dois únicos que bloqueiam de verdade (exit 2)."},
+  {"front":"Qual evento dispara quando VOCÊ envia uma mensagem?","back":"UserPromptSubmit, antes de o Claude processá-la."},
+  {"front":"Quais os dois únicos eventos que bloqueiam com exit 2?","back":"PreToolUse (barra a ferramenta) e Stop (barra o fim do turno)."},
+  {"front":"O que acontece se PostToolUse sai com exit 2?","back":"Nada é bloqueado — a ferramenta já rodou; é tratado como erro não-bloqueante (fail-open)."},
+  {"front":"Qual é o único evento de 'sessão e manutenção' que tem matcher?","back":"Notification (permission_prompt, idle_prompt, auth_success, elicitation_dialog)."},
+  {"front":"Quais dois eventos têm a documentação oficial mais incompleta?","back":"SubagentStop e PreCompact."}
 ]
 </script>
 </section>
@@ -744,20 +774,22 @@ exit 0</pre>
 <section class="view" id="v-aula-4" data-aula="4">
 <header class="hero"><div class="hero-inner">
   <div>
-    <p class="kicker">Trilha 03 · Aula 4 · Iniciante</p>
-    <h1>Formatar,<br>notificar, <em>logar</em></h1>
-    <p class="lead">Quatro receitas prontas que tiram trabalho chato da sua frente — cada uma é um hook curto que você cola e esquece.</p>
+    <p class="kicker">Trilha 01 · Aula 4 · Iniciante</p>
+    <h1>O que o<br>hook <em>recebe</em></h1>
+    <p class="lead">Todo hook começa igual: um JSON entra pela entrada padrão. Aprenda a ler esse payload — os campos que sempre estão lá, e os que mudam com o evento.</p>
     <p class="cue"><span class="arw">↓</span> role para estudar</p>
   </div>
   <div class="herofig">
     <svg viewBox="0 0 300 240" fill="none" aria-hidden="true">
-      <rect x="40" y="50" width="220" height="140" rx="14" fill="#15131d" stroke="#37324a" stroke-width="1.5"/>
-      <rect x="40" y="50" width="220" height="26" rx="14" fill="#221f2e"/>
-      <circle cx="58" cy="63" r="4" fill="#7CE0C6"/><circle cx="72" cy="63" r="4" fill="#37324a"/>
-      <text x="58" y="104" font-family="Space Mono, monospace" font-size="11" fill="#7CE0C6">✓ formatado</text>
-      <text x="58" y="126" font-family="Space Mono, monospace" font-size="11" fill="#F2B45C">🔔 pronto</text>
-      <text x="58" y="148" font-family="Space Mono, monospace" font-size="11" fill="#948DA6">› log salvo</text>
-      <rect class="blink" x="58" y="158" width="9" height="14" fill="#7CE0C6"/>
+      <rect x="30" y="50" width="140" height="110" rx="12" fill="#15131d" stroke="#37324a" stroke-width="1.5"/>
+      <text x="44" y="74" font-family="Space Mono, monospace" font-size="10" fill="#948DA6">{ session_id</text>
+      <text x="44" y="92" font-family="Space Mono, monospace" font-size="10" fill="#7CE0C6">  tool_name</text>
+      <text x="44" y="110" font-family="Space Mono, monospace" font-size="10" fill="#7CE0C6">  tool_input</text>
+      <text x="44" y="128" font-family="Space Mono, monospace" font-size="10" fill="#948DA6">  cwd … }</text>
+      <text x="100" y="146" text-anchor="middle" font-family="Space Mono, monospace" font-size="9" fill="#6C6580">stdin</text>
+      <path class="pulse" d="M172 105 H212" stroke="#7CE0C6" stroke-width="2"/><path d="M212 99 l10 6 -10 6z" fill="#7CE0C6"/>
+      <rect x="224" y="86" width="52" height="38" rx="10" fill="#221f2e" stroke="#37324a" stroke-width="1.5"/><text x="250" y="110" text-anchor="middle" font-family="Space Mono, monospace" font-size="13" fill="#7CE0C6">jq</text>
+      <text x="150" y="200" text-anchor="middle" font-family="Newsreader, serif" font-style="italic" font-size="16" fill="#C7C2D0">tudo chega por stdin</text>
     </svg>
   </div>
 </div></header>
@@ -765,126 +797,136 @@ exit 0</pre>
 <div class="layout">
   <div class="col">
     <section class="step" data-fig="1">
-      <h2><span class="n">01</span> Formatar ao salvar</h2>
-      <p>O clássico. Depois de o Claude editar um arquivo, rode o formatador nele. É <code>PostToolUse</code> com matcher <code>Edit|Write</code>:</p>
-      <pre>{ "hooks": { <span class="k">"PostToolUse"</span>: [ {
-  "matcher": "Edit|Write",
-  "hooks": [ { "type": "command",
-    "command": "f=$(jq -r .tool_input.file_path); prettier --write \"$f\"" } ]
-} ] } }</pre>
-      <p>O caminho do arquivo vem do stdin. Troque <code>prettier</code> por <code>black</code>, <code>gofmt</code>, o que for do seu projeto. Código sempre limpo, sem você lembrar.</p>
+      <h2><span class="n">01</span> Tudo chega por stdin (JSON)</h2>
+      <p>Não importa o evento: quando um hook dispara, o Claude Code monta um objeto <b>JSON</b> com o contexto daquele momento e entrega pela <b class="gterm" tabindex="0" data-def="Entrada padrão: o canal por onde o Claude Code entrega o JSON de contexto ao seu comando. Você lê com cat, jq, ou json.load(sys.stdin) em Python.">entrada padrão</b> (stdin) do seu comando. Seu script lê esse texto — com <code>cat</code>, <code>jq</code>, um <code>json.load(sys.stdin)</code> em Python — e decide o que fazer.</p>
+      <p>Uma consequência prática: hooks <b>não podem ser interativos</b>. Eles recebem tudo de uma vez, no início, e respondem de uma vez, no fim (por exit code ou por um JSON impresso). Não dá pra "perguntar" nada no meio do caminho.</p>
       <div class="mobfig" data-mobfig="1"></div>
-      <div class="quiz" data-answer="b">
-        <p class="qk">Teste-se</p>
-        <p class="q">Qual evento roda DEPOIS de um arquivo ser editado?</p>
-        <button class="opt" data-k="a">PreToolUse</button>
-        <button class="opt" data-k="b" data-fb="Post = depois. Ideal pra formatar o arquivo assim que ele é editado.">PostToolUse</button>
-        <button class="opt" data-k="c">SessionStart</button>
-        <p class="qfb"></p>
-      </div>
       <button class="readbtn" data-read="s1">marcar como lido</button>
     </section>
 
     <section class="step" data-fig="2">
-      <h2><span class="n">02</span> Avisar quando terminar</h2>
-      <p>Você saiu pra pegar um café e o Claude terminou faz tempo. O evento <code>Stop</code> resolve: dispara um aviso quando ele acaba de responder.</p>
-      <pre><span class="c"># Stop → notificação do sistema</span>
-notify-send "Claude" "terminou 👋"   <span class="c"># linux</span>
-<span class="c"># osascript -e 'display notification "terminou"'  (mac)</span></pre>
-      <p>Um <code>afplay</code>/<code>paplay</code> com um som curto também funciona. Pequeno, mas muda seu fluxo: você para de vigiar o terminal.</p>
+      <h2><span class="n">02</span> Os campos comuns</h2>
+      <p>Quatro campos aparecem em <b>todo</b> hook, não importa o evento:</p>
+      <ul>
+        <li><b class="gterm" tabindex="0" data-def="Identifica a sessão atual do Claude Code. Útil pra correlacionar logs de vários hooks na mesma conversa.">session_id</b> — identifica a sessão atual.</li>
+        <li><code>cwd</code> — o diretório de trabalho no momento.</li>
+        <li><b class="gterm" tabindex="0" data-def="Caminho do arquivo de transcript da conversa. Dá pra ler o histórico completo a partir daqui, se o hook precisar de mais contexto do que o payload traz.">transcript_path</b> — caminho pro arquivo com o histórico da conversa.</li>
+        <li><b class="gterm" tabindex="0" data-def="Diz qual evento disparou o hook (ex.: 'PreToolUse', 'Stop'). Útil quando o mesmo script atende mais de um evento.">hook_event_name</b> — diz qual evento é esse (útil se o mesmo script atende mais de um evento).</li>
+      </ul>
+      <p>Pense neles como o <b>envelope</b>: chega sempre, e te orienta antes mesmo de olhar o resto do conteúdo.</p>
       <div class="mobfig" data-mobfig="2"></div>
+      <div class="quiz" data-answer="b">
+        <p class="qk">Teste-se</p>
+        <p class="q">Qual destes campos aparece em QUALQUER hook, seja qual for o evento?</p>
+        <button class="opt" data-k="a">tool_response</button>
+        <button class="opt" data-k="b" data-fb="session_id, cwd, transcript_path e hook_event_name são o envelope comum — chegam sempre. tool_response só existe em PostToolUse.">session_id</button>
+        <button class="opt" data-k="c">notification_message</button>
+        <p class="qfb"></p>
+      </div>
       <button class="readbtn" data-read="s2">marcar como lido</button>
     </section>
 
     <section class="step" data-fig="3">
-      <h2><span class="n">03</span> Registrar os comandos</h2>
-      <p>Quer um histórico do que foi rodado? <code>PreToolUse</code> no <code>Bash</code> grava cada comando num arquivo antes de ele executar:</p>
-      <pre><span class="c"># PreToolUse, matcher "Bash" → append num log</span>
-jq -r '.tool_input.command' &gt;&gt; "$CLAUDE_PROJECT_DIR/.claude/cmd.log"
-exit 0</pre>
-      <p>Sai com <code>exit 0</code> (não barra nada, só observa). Depois você tem um diário do que a sessão fez — ótimo pra auditar ou desfazer.</p>
+      <h2><span class="n">03</span> tool_input e tool_response</h2>
+      <p>Fora o envelope comum, o resto do JSON muda com o evento. Nos eventos de ferramenta, o par mais importante é:</p>
+      <ul>
+        <li><b class="gterm" tabindex="0" data-def="O que a ferramenta vai receber (ex.: o comando do Bash, o file_path de um Edit). Presente em PreToolUse e PostToolUse — mas NÃO em SessionStart.">tool_input</b> — o que a ferramenta vai receber. Presente em <code>PreToolUse</code> <i>e</i> <code>PostToolUse</code>.</li>
+        <li><b class="gterm" tabindex="0" data-def="O resultado da ferramenta depois de ela rodar. SÓ existe em PostToolUse — em PreToolUse a ferramenta ainda não rodou, então não há resposta ainda.">tool_response</b> — o resultado depois da ferramenta rodar. Só existe em <code>PostToolUse</code> — em <code>PreToolUse</code> a ferramenta ainda nem rodou.</li>
+      </ul>
+      <p>Outros eventos trazem seus próprios campos: <code>Notification</code> vem com <code>notification_type</code> e <code>notification_message</code>; <code>SessionStart</code> não traz nenhum dado de ferramenta (não tem o que trazer — nada rodou ainda). Sempre olhe o <code>hook_event_name</code> antes de assumir que um campo vai estar lá.</p>
       <div class="mobfig" data-mobfig="3"></div>
-      <div class="quiz" data-answer="a">
+      <div class="quiz" data-answer="c">
         <p class="qk">Teste-se</p>
-        <p class="q">Um hook que só registra (sem barrar) deve sair com:</p>
-        <button class="opt" data-k="a" data-fb="Só observar (logar) não pode bloquear: saia com exit 0 pra o comando seguir.">exit 0</button>
-        <button class="opt" data-k="b">exit 2</button>
-        <button class="opt" data-k="c">nenhum, ele não sai</button>
+        <p class="q">Por que o campo <code>tool_response</code> não aparece no JSON de um <code>PreToolUse</code>?</p>
+        <button class="opt" data-k="a">é um bug conhecido</button>
+        <button class="opt" data-k="b">porque PreToolUse nunca recebe tool_input também</button>
+        <button class="opt" data-k="c" data-fb="PreToolUse dispara ANTES da ferramenta rodar — não existe resposta ainda pra entregar. Ela só aparece no PostToolUse.">a ferramenta ainda não rodou nesse momento — não existe resposta ainda</button>
         <p class="qfb"></p>
       </div>
       <button class="readbtn" data-read="s3">marcar como lido</button>
     </section>
 
     <section class="step" data-fig="4">
-      <h2><span class="n">04</span> Injetar contexto no começo</h2>
-      <p>O evento <code>SessionStart</code> roda quando a sessão abre, e o que ele <b>imprime vira contexto</b> pro Claude. Use pra ele já começar sabendo do projeto:</p>
-      <pre><span class="c"># SessionStart → estado atual entra no contexto</span>
-echo "Branch: $(git branch --show-current)"
-echo "Últimos commits:"; git log --oneline -5</pre>
-      <p>Assim o Claude abre a sessão já ciente do branch, do que mudou, das regras do projeto — sem você colar nada à mão.</p>
+      <h2><span class="n">04</span> Ler com jq</h2>
+      <p>Na prática, três comandos resolvem quase tudo:</p>
+      <pre><span class="c"># nome da ferramenta</span>
+jq -r '.tool_name'
+<span class="c"># o comando que o Bash ia rodar</span>
+jq -r '.tool_input.command'
+<span class="c"># o arquivo que foi editado</span>
+jq -r '.tool_input.file_path'</pre>
+      <p>Pra explorar um payload inteiro enquanto você aprende, <code>jq .</code> (sem filtro) imprime tudo formatado e legível — bom pra debugar um hook novo antes de escrever o filtro certo.</p>
       <div class="mobfig" data-mobfig="4"></div>
       <details>
         <summary>Indo mais fundo</summary>
-        <p><code>UserPromptSubmit</code> faz parecido a cada mensagem sua (injeta contexto ou registra o prompt). Combine os quatro e o ambiente inteiro passa a se cuidar sozinho.</p>
+        <p>Sem <code>jq</code> instalado, dá pra ler o mesmo JSON em Python: <code>import sys, json; data = json.load(sys.stdin)</code>, e depois <code>data.get("tool_name")</code>. Mais verboso, mas roda em qualquer máquina com Python.</p>
       </details>
       <button class="readbtn" data-read="s4">marcar como lido</button>
     </section>
 
     <section class="practice" data-practice="p4">
-      <p class="pk">Pratique agora <span class="pcount">0/3 feito</span></p>
-      <h3 class="ph">Um aviso quando o Claude terminar</h3>
-      <p class="pgoal">Deixe o Claude carimbar um arquivo toda vez que terminar de responder — o gancho do evento <code>Stop</code>. Portável: não depende de desktop.</p>
+      <p class="pk">Pratique agora <span class="pcount">0/4 feito</span></p>
+      <h3 class="ph">Logue tool_name + command com jq</h3>
+      <p class="pgoal">Grave, por extenso, qual ferramenta rodou e qual comando ela recebeu — direto do JSON do stdin. ~5 min, seguro (só observa).</p>
       <div class="pcodewrap"><button class="pcopy" type="button">copiar</button><pre class="pcode">{
   <span class="k">"hooks"</span>: {
-    <span class="k">"Stop"</span>: [
+    <span class="k">"PreToolUse"</span>: [
       {
+        <span class="k">"matcher"</span>: "Bash",
         <span class="k">"hooks"</span>: [
-          { "type": "command", "command": "date &gt;&gt; .claude/done.log" }
+          { "type": "command", "command": "jq -r '.tool_name + \" \" + .tool_input.command' &gt;&gt; .claude/tool.log" }
         ]
       }
     ]
   }
 }</pre></div>
       <ol class="psteps">
-        <li><label><input type="checkbox" data-ptask="1"> Ponha o bloco no <code>.claude/settings.json</code> e salve.</label></li>
-        <li><label><input type="checkbox" data-ptask="2"> Deixe o Claude terminar um turno qualquer.</label></li>
-        <li><label><input type="checkbox" data-ptask="3"> Rode <code>cat .claude/done.log</code> — uma linha nova a cada término.</label></li>
+        <li><label><input type="checkbox" data-ptask="1"> Cole o bloco no <code>.claude/settings.json</code> e salve.</label></li>
+        <li><label><input type="checkbox" data-ptask="2"> Peça ao Claude pra rodar um comando (ex.: <code>ls -la</code>).</label></li>
+        <li><label><input type="checkbox" data-ptask="3"> Rode <code>cat .claude/tool.log</code> — apareceu "Bash ls -la"?</label></li>
+        <li><label><input type="checkbox" data-ptask="4"> Troque o filtro pra também mostrar o <code>cwd</code> (dica: some mais um <code>+ " " + .cwd</code>).</label></li>
       </ol>
-      <p class="pdone">✓ <code>Stop</code> virou um sinal seu. Troque o <code>date</code> por um <code>notify-send</code> ou um som e você para de vigiar o terminal.</p>
+      <p class="pdone">✓ Você foi do payload bruto até um log legível com um filtro de uma linha. É essa a distância real entre "chegou um JSON" e "meu hook decide algo com ele".</p>
     </section>
   </div>
 
   <aside class="rail"><div class="railsticky">
     <div class="figstage">
-      <div class="fig on" data-fig="1" data-cap="<b>Fig.</b> editou → formata o arquivo">
+      <div class="fig on" data-fig="1" data-cap="<b>Fig.</b> tudo chega por stdin, em JSON">
         <svg viewBox="0 0 220 200" fill="none" aria-hidden="true">
-          <rect x="26" y="80" width="60" height="40" rx="8" fill="#221f2e" stroke="#37324a"/><text x="56" y="104" text-anchor="middle" font-family="Space Mono" font-size="9" fill="#C7C2D0">edit</text>
-          <path class="breathe" d="M90 100 H130" stroke="#7CE0C6" stroke-width="2"/><path d="M130 94 l10 6 -10 6z" fill="#7CE0C6"/>
-          <rect x="146" y="80" width="52" height="40" rx="8" fill="none" stroke="#7CE0C6"/><text x="172" y="104" text-anchor="middle" font-family="Space Mono" font-size="9" fill="#7CE0C6">fmt</text>
+          <rect x="24" y="50" width="90" height="100" rx="10" fill="#15131d" stroke="#37324a"/>
+          <text x="34" y="72" font-family="Space Mono" font-size="8" fill="#948DA6">{ …</text>
+          <text x="34" y="90" font-family="Space Mono" font-size="8" fill="#7CE0C6">  json</text>
+          <text x="34" y="108" font-family="Space Mono" font-size="8" fill="#948DA6">  … }</text>
+          <text x="69" y="136" text-anchor="middle" font-family="Space Mono" font-size="8" fill="#6C6580">stdin</text>
+          <path class="breathe" d="M118 100 H150" stroke="#7CE0C6" stroke-width="2"/><path d="M150 94 l10 6 -10 6z" fill="#7CE0C6"/>
+          <rect x="162" y="82" width="42" height="36" rx="8" fill="none" stroke="#7CE0C6"/><text x="183" y="105" text-anchor="middle" font-family="Space Mono" font-size="9" fill="#7CE0C6">hook</text>
         </svg>
       </div>
-      <div class="fig" data-fig="2" data-cap="<b>Fig.</b> terminou → 🔔">
+      <div class="fig" data-fig="2" data-cap="<b>Fig.</b> o envelope comum: sempre presente">
         <svg viewBox="0 0 220 200" fill="none" aria-hidden="true">
-          <path class="breathe" d="M110 60 c-20 0 -30 14 -30 34 c0 26 -8 30 -14 38 h88 c-6 -8 -14 -12 -14 -38 c0 -20 -10 -34 -30 -34z" fill="none" stroke="#F2B45C" stroke-width="2"/>
-          <circle cx="110" cy="146" r="7" fill="none" stroke="#F2B45C" stroke-width="2"/>
-          <text x="110" y="184" text-anchor="middle" font-family="Space Mono" font-size="9" fill="#948DA6">Stop</text>
+          <rect class="breathe" x="30" y="24" width="160" height="28" rx="7" fill="none" stroke="#7CE0C6"/><text x="110" y="43" text-anchor="middle" font-family="Space Mono" font-size="9" fill="#7CE0C6">session_id</text>
+          <rect class="breathe" x="30" y="60" width="160" height="28" rx="7" fill="none" stroke="#7CE0C6" style="animation-delay:.2s"/><text x="110" y="79" text-anchor="middle" font-family="Space Mono" font-size="9" fill="#7CE0C6">cwd</text>
+          <rect class="breathe" x="30" y="96" width="160" height="28" rx="7" fill="none" stroke="#7CE0C6" style="animation-delay:.4s"/><text x="110" y="115" text-anchor="middle" font-family="Space Mono" font-size="9" fill="#7CE0C6">transcript_path</text>
+          <rect class="breathe" x="30" y="132" width="160" height="28" rx="7" fill="none" stroke="#7CE0C6" style="animation-delay:.6s"/><text x="110" y="151" text-anchor="middle" font-family="Space Mono" font-size="9" fill="#7CE0C6">hook_event_name</text>
         </svg>
       </div>
-      <div class="fig" data-fig="3" data-cap="<b>Fig.</b> cada comando → log">
+      <div class="fig" data-fig="3" data-cap="<b>Fig.</b> tool_input (antes) → tool_response (depois)">
         <svg viewBox="0 0 220 200" fill="none" aria-hidden="true">
-          <rect x="50" y="50" width="120" height="110" rx="10" fill="#15131d" stroke="#37324a"/>
-          <line class="breathe" x1="66" y1="72" x2="150" y2="72" stroke="#7CE0C6" stroke-width="2"/>
-          <line class="breathe" x1="66" y1="92" x2="140" y2="92" stroke="#7CE0C6" stroke-width="2" style="animation-delay:.3s"/>
-          <line class="breathe" x1="66" y1="112" x2="154" y2="112" stroke="#7CE0C6" stroke-width="2" style="animation-delay:.6s"/>
-          <line class="breathe" x1="66" y1="132" x2="128" y2="132" stroke="#948DA6" stroke-width="2" style="animation-delay:.9s"/>
-          <text x="110" y="184" text-anchor="middle" font-family="Space Mono" font-size="9" fill="#948DA6">cmd.log</text>
+          <rect x="20" y="82" width="70" height="36" rx="8" fill="none" stroke="#7CE0C6"/><text x="55" y="105" text-anchor="middle" font-family="Space Mono" font-size="9" fill="#7CE0C6">tool_input</text>
+          <text x="55" y="134" text-anchor="middle" font-family="Space Mono" font-size="8" fill="#948DA6">Pre + Post</text>
+          <path class="breathe" d="M96 100 H124" stroke="#37324a" stroke-width="2"/><path d="M124 94 l10 6 -10 6z" fill="#37324a"/>
+          <rect x="132" y="82" width="70" height="36" rx="8" fill="none" stroke="#F2B45C"/><text x="167" y="105" text-anchor="middle" font-family="Space Mono" font-size="9" fill="#F2B45C">tool_response</text>
+          <text x="167" y="134" text-anchor="middle" font-family="Space Mono" font-size="8" fill="#948DA6">só Post</text>
         </svg>
       </div>
-      <div class="fig" data-fig="4" data-cap="<b>Fig.</b> SessionStart → contexto entra">
+      <div class="fig" data-fig="4" data-cap="<b>Fig.</b> jq lê o campo que importa">
         <svg viewBox="0 0 220 200" fill="none" aria-hidden="true">
-          <circle cx="60" cy="100" r="22" fill="none" stroke="#7CE0C6"/><text x="60" y="104" text-anchor="middle" font-family="Space Mono" font-size="8" fill="#7CE0C6">start</text>
-          <path class="breathe" d="M84 100 H124" stroke="#7CE0C6" stroke-width="2"/><path d="M124 94 l10 6 -10 6z" fill="#7CE0C6"/>
-          <rect x="140" y="74" width="56" height="52" rx="10" fill="#221f2e" stroke="#37324a"/><text x="168" y="97" text-anchor="middle" font-family="Space Mono" font-size="8" fill="#C7C2D0">branch</text><text x="168" y="112" text-anchor="middle" font-family="Space Mono" font-size="8" fill="#C7C2D0">commits</text>
+          <rect x="20" y="80" width="52" height="40" rx="8" fill="#15131d" stroke="#37324a"/><text x="46" y="104" text-anchor="middle" font-family="Space Mono" font-size="9" fill="#948DA6">stdin</text>
+          <path class="breathe" d="M76 100 H104" stroke="#7CE0C6" stroke-width="2"/><path d="M104 94 l9 6 -9 6z" fill="#7CE0C6"/>
+          <rect x="116" y="80" width="40" height="40" rx="8" fill="#221f2e" stroke="#37324a"/><text x="136" y="104" text-anchor="middle" font-family="Space Mono" font-size="10" fill="#7CE0C6">jq</text>
+          <path class="breathe" d="M160 100 H184" stroke="#7CE0C6" stroke-width="2" style="animation-delay:.4s"/><path d="M184 94 l9 6 -9 6z" fill="#7CE0C6"/>
+          <text x="200" y="104" text-anchor="middle" font-family="Space Mono" font-size="9" fill="#F2B45C">valor</text>
         </svg>
       </div>
     </div>
@@ -894,15 +936,16 @@ echo "Últimos commits:"; git log --oneline -5</pre>
   </div></aside>
 </div>
 
-<nav class="lnav"><a href="#aula-3">← Aula 3</a><a href="#aula-5">Aula 5 · Hooks em equipe e CI →</a></nav>
-<footer>Aula 4 de 5 · Trilha 03 · Automação &amp; Hooks · INEMA.CLUB PRO</footer>
+<nav class="lnav"><a href="#aula-3">← Aula 3</a><a href="#aula-5">Aula 5 · Como o hook responde →</a></nav>
+<footer>Aula 4 de 5 · Trilha 01 · Fundamentos · INEMA.CLUB PRO</footer>
 
 <script type="application/json" id="cards-4">
 [
-  {"front":"Receita para formatar ao salvar: qual evento e matcher?","back":"PostToolUse com matcher \"Edit|Write\", rodando o formatador no file_path."},
-  {"front":"Qual evento avisa quando o Claude termina de responder?","back":"Stop."},
-  {"front":"Como registrar todo comando rodado?","back":"PreToolUse em Bash faz append do .tool_input.command num log e sai com exit 0."},
-  {"front":"O que a saída de um hook SessionStart faz?","back":"Vira contexto para o Claude (ex.: branch, últimos commits, regras)."}
+  {"front":"Como o Claude Code entrega o contexto a um hook?","back":"Um JSON pela entrada padrão (stdin) do comando."},
+  {"front":"Quais quatro campos aparecem em QUALQUER hook?","back":"session_id, cwd, transcript_path e hook_event_name."},
+  {"front":"Em quais eventos aparece tool_input?","back":"PreToolUse e PostToolUse (os eventos de ferramenta)."},
+  {"front":"Em qual evento aparece tool_response, e por quê?","back":"Só em PostToolUse — em PreToolUse a ferramenta ainda não rodou."},
+  {"front":"Por que hooks não podem ser interativos?","back":"Recebem tudo de uma vez no início (stdin) e respondem de uma vez no fim (exit code ou JSON) — não há como perguntar no meio."}
 ]
 </script>
 </section>
@@ -911,20 +954,19 @@ echo "Últimos commits:"; git log --oneline -5</pre>
 <section class="view" id="v-aula-5" data-aula="5">
 <header class="hero"><div class="hero-inner">
   <div>
-    <p class="kicker">Trilha 03 · Aula 5 · Iniciante</p>
-    <h1>Hooks em<br><em>equipe</em> e CI</h1>
-    <p class="lead">O que muda quando os hooks saem da sua máquina: versionar pro time, confiar no determinismo, rodar em pipeline — e a higiene pra não se machucar.</p>
+    <p class="kicker">Trilha 01 · Aula 5 · Iniciante</p>
+    <h1>Como o hook<br><em>responde</em></h1>
+    <p class="lead">Exit code é o sinal simples. Mas um hook também pode devolver um JSON — e explicar, com um motivo, a decisão que tomou.</p>
     <p class="cue"><span class="arw">↓</span> role para estudar</p>
   </div>
   <div class="herofig">
     <svg viewBox="0 0 300 240" fill="none" aria-hidden="true">
-      <circle cx="80" cy="90" r="16" fill="none" stroke="#7CE0C6" stroke-width="1.5"/>
-      <circle cx="150" cy="70" r="16" fill="none" stroke="#7CE0C6" stroke-width="1.5"/>
-      <circle cx="220" cy="90" r="16" fill="none" stroke="#7CE0C6" stroke-width="1.5"/>
-      <path class="pulse" d="M96 90 H134 M166 74 H204" stroke="#37324a" stroke-width="1.5"/>
-      <rect x="120" y="140" width="60" height="34" rx="8" fill="#221f2e" stroke="#37324a"/><text x="150" y="162" text-anchor="middle" font-family="Space Mono, monospace" font-size="11" fill="#F2B45C">.claude</text>
-      <path class="pulse" d="M80 106 V150 H120 M220 106 V150 H180 M150 86 V140" stroke="#37324a" stroke-width="1.5"/>
-      <text x="150" y="206" text-anchor="middle" font-family="Newsreader, serif" font-style="italic" font-size="15" fill="#C7C2D0">um settings, todo o time</text>
+      <rect x="30" y="90" width="80" height="60" rx="10" fill="#15131d" stroke="#37324a" stroke-width="1.5"/><text x="70" y="124" text-anchor="middle" font-family="Space Mono, monospace" font-size="11" fill="#948DA6">hook</text>
+      <path class="pulse" d="M110 108 H160" stroke="#7CE0C6" stroke-width="2"/><path d="M160 102 l10 6 -10 6z" fill="#7CE0C6"/>
+      <text x="220" y="94" text-anchor="middle" font-family="Space Mono, monospace" font-size="11" fill="#7CE0C6">exit code</text>
+      <path class="pulse" d="M110 132 H160" stroke="#F2B45C" stroke-width="2" style="animation-delay:.4s"/><path d="M160 126 l10 6 -10 6z" fill="#F2B45C"/>
+      <text x="220" y="150" text-anchor="middle" font-family="Space Mono, monospace" font-size="11" fill="#F2B45C">JSON</text>
+      <text x="150" y="204" text-anchor="middle" font-family="Newsreader, serif" font-style="italic" font-size="16" fill="#C7C2D0">dois jeitos de responder</text>
     </svg>
   </div>
 </div></header>
@@ -932,120 +974,143 @@ echo "Últimos commits:"; git log --oneline -5</pre>
 <div class="layout">
   <div class="col">
     <section class="step" data-fig="1">
-      <h2><span class="n">01</span> Versionar os hooks</h2>
-      <p>Na sua máquina, o hook ajuda você. No <b>repositório</b>, ele ajuda o time inteiro. A diferença é só o arquivo:</p>
+      <h2><span class="n">01</span> Dois jeitos de responder</h2>
+      <p>Um hook fala de volta com o Claude Code de duas formas, que podem se combinar:</p>
       <ul>
-        <li><code>.claude/settings.json</code> — vai pro Git. Quem clonar o projeto <b>herda os mesmos hooks</b>.</li>
-        <li><code>.claude/settings.local.json</code> — fica no <code>.gitignore</code>. É seu, não sai da máquina.</li>
+        <li><b>Exit code</b> — o sinal mais simples: um número. Rápido de escrever, cobre a maioria dos casos.</li>
+        <li><b>JSON no stdout</b> — quando o número não basta. Você imprime um objeto com uma decisão explícita, um <b>motivo</b> em texto, e ajustes finos de comportamento.</li>
       </ul>
-      <p>Regra: trava de segurança e formatador que <b>todos</b> deveriam ter → versione. Atalho pessoal → local. Assim o padrão do time viaja junto com o código.</p>
+      <p>Comece sempre pelo exit code — é o caminho rápido das aulas anteriores. Migre pro JSON quando precisar de nuance: pedir <b>confirmação</b> em vez de barrar, ou explicar <b>por quê</b> de um jeito mais rico do que uma linha no stderr.</p>
       <div class="mobfig" data-mobfig="1"></div>
-      <div class="quiz" data-answer="a">
-        <p class="qk">Teste-se</p>
-        <p class="q">Onde colocar um hook para TODO o time herdar?</p>
-        <button class="opt" data-k="a" data-fb="Vai pro Git, então quem clonar herda os mesmos hooks. O .local e o global não viajam com o projeto.">.claude/settings.json (versionado)</button>
-        <button class="opt" data-k="b">.claude/settings.local.json</button>
-        <button class="opt" data-k="c">~/.claude/settings.json</button>
-        <p class="qfb"></p>
-      </div>
       <button class="readbtn" data-read="s1">marcar como lido</button>
     </section>
 
     <section class="step" data-fig="2">
-      <h2><span class="n">02</span> Determinismo: dá pra confiar</h2>
-      <p>Um hook é um comando comum: <b>mesma entrada, mesmo resultado</b>. Ele não "acha" nada, não varia com o humor do modelo. Roda igual na sua máquina, na do colega e no servidor.</p>
-      <p>É essa previsibilidade que deixa você <b>confiar a segurança</b> a um hook. A trava que barra <code>rm -rf</code> vai barrar sempre — não é uma sugestão que o modelo pode ignorar, é código que sempre executa.</p>
+      <h2><span class="n">02</span> Os exit codes</h2>
+      <p>Três faixas de código, três comportamentos bem diferentes:</p>
+      <ul>
+        <li><code>0</code> — sucesso, segue normalmente.</li>
+        <li><b class="gterm" tabindex="0" data-def="Bloqueia a ação — mas só em PreToolUse (barra a ferramenta) e Stop (barra o fim do turno). O que você imprime no stderr vira o motivo mostrado ao Claude.">exit 2</b> — bloqueia, mas <b>só</b> em <code>PreToolUse</code> e <code>Stop</code>. O que você imprime no <code>stderr</code> vira o motivo.</li>
+        <li><code>1</code>, <code>3</code> ou mais — erro <b>não-bloqueante</b>: a ação segue (fail-open). Seu hook quebrou, mas o Claude não trava por causa disso.</li>
+      </ul>
+      <p>Esse último ponto é deliberado: um hook malformado não devia conseguir travar o Claude Code inteiro. Prefira <b>falhar aberto</b> — se seu script tiver um bug, o pior cenário é o hook não fazer nada, não é o Claude ficar parado.</p>
       <div class="mobfig" data-mobfig="2"></div>
+      <details>
+        <summary>Indo mais fundo</summary>
+        <p>Esse princípio se chama <b>fail-open</b>: no seu script, sempre tenha um caminho de saída garantido (um <code>trap</code> no shell, um <code>try/except</code> em Python) que devolve <code>exit 0</code> se algo inesperado acontecer. Um hook de segurança que trava sozinho é pior do que nenhum hook.</p>
+      </details>
+      <div class="quiz" data-answer="b">
+        <p class="qk">Teste-se</p>
+        <p class="q">Um hook <code>Notification</code> sai com <code>exit 1</code> por um bug no script. O que acontece?</p>
+        <button class="opt" data-k="a">a sessão trava esperando o hook</button>
+        <button class="opt" data-k="b" data-fb="Qualquer código diferente de 0 e de 2 (em Pre/Stop) é erro não-bloqueante: o fluxo segue normalmente, fail-open.">é tratado como erro não-bloqueante; o fluxo continua normalmente</button>
+        <button class="opt" data-k="c">o Claude é notificado do bug e para tudo</button>
+        <p class="qfb"></p>
+      </div>
       <button class="readbtn" data-read="s2">marcar como lido</button>
     </section>
 
     <section class="step" data-fig="3">
-      <h2><span class="n">03</span> Rodando sem ninguém olhando</h2>
-      <p>O Claude Code roda também em <b>modo headless</b> — sem interface, tocado por script (<code>claude -p "…"</code>), dentro de um pipeline de CI. E os <b>hooks continuam valendo</b>.</p>
-      <p>Ou seja: o formatador, a trava e o log que você montou pra usar no dia a dia <b>também protegem a automação</b>. O mesmo padrão vale pro humano e pro robô — você configura uma vez.</p>
+      <h2><span class="n">03</span> JSON de saída</h2>
+      <p>Em vez de só um exit code, o hook pode imprimir um <b>JSON</b> no stdout com uma decisão mais expressiva:</p>
+      <pre>{
+  "decision": "approve|block",
+  "reason": "string",
+  "suppressOutput": false,
+  "continue": true
+}</pre>
+      <p>Cada campo tem um papel:</p>
+      <ul>
+        <li><code>decision</code> — <code>"approve"</code> ou <code>"block"</code>, a versão explícita do exit code.</li>
+        <li><b class="gterm" tabindex="0" data-def="Texto que explica a decisão do hook. Aparece pro Claude (e, dependendo do caso, pro usuário) como o motivo por trás de um bloqueio ou de um pedido de confirmação.">reason</b> — o motivo, em texto — o que antes só ia pelo stderr.</li>
+        <li><code>suppressOutput</code> — esconde a saída do hook do transcript, quando ela não interessa a ninguém.</li>
+        <li><code>continue</code> — se <code>false</code>, para a sessão inteira, não só a ação atual. Use com cuidado.</li>
+      </ul>
       <div class="mobfig" data-mobfig="3"></div>
-      <div class="quiz" data-answer="b">
+      <div class="quiz" data-answer="a">
         <p class="qk">Teste-se</p>
-        <p class="q">No modo headless (CI), os hooks configurados:</p>
-        <button class="opt" data-k="a">são ignorados</button>
-        <button class="opt" data-k="b" data-fb="Hooks valem em headless (claude -p) e CI — o mesmo padrão protege humano e robô.">continuam valendo</button>
-        <button class="opt" data-k="c">só rodam se você confirmar</button>
+        <p class="q">Qual campo do JSON de saída explica, em texto, o motivo de uma decisão?</p>
+        <button class="opt" data-k="a" data-fb="reason carrega o motivo em texto — a versão estruturada do que antes ia solto pelo stderr.">reason</button>
+        <button class="opt" data-k="b">suppressOutput</button>
+        <button class="opt" data-k="c">continue</button>
         <p class="qfb"></p>
       </div>
       <button class="readbtn" data-read="s3">marcar como lido</button>
     </section>
 
     <section class="step" data-fig="4">
-      <h2><span class="n">04</span> Higiene: hook é poder</h2>
-      <p>Um hook roda comandos automaticamente — então trate com respeito:</p>
-      <ul>
-        <li><b>Rápido</b> — ele entra no caminho de cada ação; um hook lento trava seu fluxo.</li>
-        <li><b>Idempotente</b> — rodar duas vezes não pode quebrar nada.</li>
-        <li><b>Sem vazar segredo</b> — não imprima tokens/chaves; o output pode ir pro contexto ou pro log.</li>
-        <li><b>Falhe com clareza</b> — mensagem no <code>stderr</code> dizendo o porquê.</li>
-      </ul>
-      <p>Comece com um hook simples e seguro. O objetivo não é automatizar tudo — é tirar da sua cabeça as poucas coisas que você não devia precisar lembrar.</p>
+      <h2><span class="n">04</span> permissionDecision e contexto extra</h2>
+      <p>Pra decisões de ferramenta, o JSON pode ficar ainda mais fino com um bloco próprio:</p>
+      <pre>{
+  "hookSpecificOutput": {
+    "permissionDecision": "allow|deny|ask"
+  },
+  "reason": "confirmar antes de rodar em produção"
+}</pre>
+      <p>Três posturas, não duas: <b class="gterm" tabindex="0" data-def="Uma das três posturas de permissionDecision: libera a ação, sem perguntar nada.">allow</b> (libera), <b class="gterm" tabindex="0" data-def="Uma das três posturas de permissionDecision: barra a ação — equivalente, na prática, ao exit 2.">deny</b> (barra — equivalente ao exit 2) e <b class="gterm" tabindex="0" data-def="Uma das três posturas de permissionDecision: pausa e pede confirmação ao usuário, em vez de decidir sozinho.">ask</b> (pausa e <b>pergunta</b> a você, em vez de decidir sozinho). É essa terceira opção que o exit code puro não tem — nem tudo é preto no branco, e às vezes o certo é só avisar.</p>
+      <p>Alguns eventos também aceitam um <code>additionalContext</code> dentro do JSON — texto extra que entra no contexto do Claude, além da decisão em si. É como injetar uma nota de rodapé no que ele está processando.</p>
       <div class="mobfig" data-mobfig="4"></div>
-      <details>
-        <summary>Indo mais fundo</summary>
-        <p>Dá pra dar <b>timeout</b> aos comandos e escolher a ordem de execução quando há vários hooks no mesmo matcher. Mas isso é afinação — a base é: rápido, idempotente, silencioso sobre segredos.</p>
-      </details>
       <button class="readbtn" data-read="s4">marcar como lido</button>
     </section>
 
     <section class="practice" data-practice="p5">
-      <p class="pk">Pratique agora <span class="pcount">0/4 feito</span></p>
-      <h3 class="ph">Versione pro time <span style="color:var(--faint)">· capstone</span></h3>
-      <p class="pgoal">Consolide os hooks que você montou e faça o padrão <b>viajar com o repositório</b> — quem clonar herda tudo.</p>
-      <div class="pcodewrap"><button class="pcopy" type="button">copiar</button><pre class="pcode"><span class="c"># suas travas/formatadores vão no arquivo versionado</span>
-git add .claude/settings.json
-git status
-<span class="c"># o que é pessoal (só seu) fica de fora do Git:</span>
-echo ".claude/settings.local.json" &gt;&gt; .gitignore</pre></div>
+      <p class="pk">Pratique agora <span class="pcount">0/4 feito</span> <span style="color:var(--faint)">· capstone</span></p>
+      <h3 class="ph">Um PreToolUse que pergunta em vez de barrar</h3>
+      <p class="pgoal">Feche a trilha fazendo um hook responder com <code>permissionDecision: "ask"</code> e um motivo — sem apagar nada. ~5 min, seguro: só pede confirmação.</p>
+      <div class="pcodewrap"><button class="pcopy" type="button">copiar</button><pre class="pcode">{
+  <span class="k">"hooks"</span>: {
+    <span class="k">"PreToolUse"</span>: [
+      {
+        <span class="k">"matcher"</span>: "Bash",
+        <span class="k">"hooks"</span>: [
+          { "type": "command",
+            "command": "grep -q PEDECONFIRMACAO &amp;&amp; printf '{\"hookSpecificOutput\":{\"permissionDecision\":\"ask\"},\"reason\":\"confirmar antes de rodar\"}'; exit 0" }
+        ]
+      }
+    ]
+  }
+}</pre></div>
       <ol class="psteps">
-        <li><label><input type="checkbox" data-ptask="1"> Garanta que a trava e o formatador estão em <code>.claude/settings.json</code> (não no <code>.local</code>).</label></li>
-        <li><label><input type="checkbox" data-ptask="2"> Rode <code>git add .claude/settings.json</code>.</label></li>
-        <li><label><input type="checkbox" data-ptask="3"> Rode <code>git status</code> — o arquivo aparece rastreado.</label></li>
-        <li><label><input type="checkbox" data-ptask="4"> Deixe seus atalhos pessoais no <code>.local.json</code> (no <code>.gitignore</code>).</label></li>
+        <li><label><input type="checkbox" data-ptask="1"> Cole o bloco no <code>.claude/settings.json</code> e salve.</label></li>
+        <li><label><input type="checkbox" data-ptask="2"> Peça ao Claude pra rodar <code>echo PEDECONFIRMACAO</code>.</label></li>
+        <li><label><input type="checkbox" data-ptask="3"> Veja o Claude <b>pausar e perguntar</b>, mostrando o motivo ("confirmar antes de rodar").</label></li>
+        <li><label><input type="checkbox" data-ptask="4"> Troque <code>PEDECONFIRMACAO</code> pelo padrão real que merece uma confirmação (ex.: um comando de deploy).</label></li>
       </ol>
-      <p class="pdone">✓ O padrão do time agora viaja junto com o código — rápido, idempotente, sem vazar segredo. Vale pro humano e pro CI. Fim da trilha. 🎉</p>
+      <p class="pdone">✓ Fim da trilha: seu hook não só decide (exit code) — ele explica a decisão em JSON, com <code>permissionDecision</code> e um motivo. É o mesmo <b>quando isto → roda aquilo</b> da Aula 1, só que agora o Claude entende exatamente o porquê.</p>
     </section>
   </div>
 
   <aside class="rail"><div class="railsticky">
     <div class="figstage">
-      <div class="fig on" data-fig="1" data-cap="<b>Fig.</b> um settings versionado, todo o time herda">
+      <div class="fig on" data-fig="1" data-cap="<b>Fig.</b> exit code ou JSON — dois jeitos de responder">
         <svg viewBox="0 0 220 200" fill="none" aria-hidden="true">
-          <circle cx="50" cy="60" r="14" fill="none" stroke="#7CE0C6" stroke-width="1.5"/>
-          <circle cx="110" cy="46" r="14" fill="none" stroke="#7CE0C6" stroke-width="1.5"/>
-          <circle cx="170" cy="60" r="14" fill="none" stroke="#7CE0C6" stroke-width="1.5"/>
-          <rect class="breathe" x="82" y="112" width="56" height="30" rx="8" fill="none" stroke="#F2B45C"/><text x="110" y="132" text-anchor="middle" font-family="Space Mono" font-size="9" fill="#F2B45C">.claude</text>
-          <path d="M50 74 V128 H82 M170 74 V128 H138 M110 60 V112" stroke="#37324a" stroke-width="1.5"/>
+          <rect x="20" y="82" width="60" height="40" rx="8" fill="#221f2e" stroke="#37324a"/><text x="50" y="106" text-anchor="middle" font-family="Space Mono" font-size="9" fill="#C7C2D0">hook</text>
+          <path class="breathe" d="M84 92 H120" stroke="#7CE0C6" stroke-width="2"/><path d="M120 86 l9 6 -9 6z" fill="#7CE0C6"/>
+          <text x="160" y="80" text-anchor="middle" font-family="Space Mono" font-size="9" fill="#7CE0C6">exit code</text>
+          <path class="breathe" d="M84 112 H120" stroke="#F2B45C" stroke-width="2" style="animation-delay:.4s"/><path d="M120 106 l9 6 -9 6z" fill="#F2B45C"/>
+          <text x="160" y="128" text-anchor="middle" font-family="Space Mono" font-size="9" fill="#F2B45C">JSON</text>
         </svg>
       </div>
-      <div class="fig" data-fig="2" data-cap="<b>Fig.</b> mesma entrada → mesmo resultado">
+      <div class="fig" data-fig="2" data-cap="<b>Fig.</b> 0 segue · 2 barra (Pre/Stop) · outros = fail-open">
         <svg viewBox="0 0 220 200" fill="none" aria-hidden="true">
-          <rect x="24" y="82" width="44" height="36" rx="8" fill="#221f2e" stroke="#37324a"/><text x="46" y="105" text-anchor="middle" font-family="Space Mono" font-size="9" fill="#C7C2D0">in</text>
-          <path class="breathe" d="M72 100 H104" stroke="#7CE0C6" stroke-width="2"/><path d="M104 94 l10 6 -10 6z" fill="#7CE0C6"/>
-          <rect x="112" y="82" width="40" height="36" rx="8" fill="none" stroke="#7CE0C6"/><text x="132" y="105" text-anchor="middle" font-family="Space Mono" font-size="9" fill="#7CE0C6">hook</text>
-          <path class="breathe" d="M156 100 H184" stroke="#7CE0C6" stroke-width="2" style="animation-delay:.4s"/><path d="M184 94 l10 6 -10 6z" fill="#7CE0C6"/>
-          <text x="200" y="105" text-anchor="middle" font-family="Space Mono" font-size="9" fill="#948DA6">out</text>
+          <rect class="breathe" x="30" y="26" width="160" height="30" rx="8" fill="none" stroke="#7CE0C6"/><text x="110" y="46" text-anchor="middle" font-family="Space Mono" font-size="10" fill="#7CE0C6">0 → segue</text>
+          <rect class="breathe" x="30" y="70" width="160" height="30" rx="8" fill="none" stroke="#F2B45C" style="animation-delay:.3s"/><text x="110" y="90" text-anchor="middle" font-family="Space Mono" font-size="10" fill="#F2B45C">2 → barra (Pre/Stop)</text>
+          <rect class="breathe" x="30" y="114" width="160" height="30" rx="8" fill="none" stroke="#948DA6" style="animation-delay:.6s"/><text x="110" y="134" text-anchor="middle" font-family="Space Mono" font-size="10" fill="#948DA6">outros → fail-open</text>
         </svg>
       </div>
-      <div class="fig" data-fig="3" data-cap="<b>Fig.</b> headless / CI: hooks continuam">
-        <svg viewBox="0 0 220 200" fill="none" aria-hidden="true">
-          <rect x="26" y="86" width="40" height="28" rx="7" fill="#221f2e" stroke="#37324a"/><text x="46" y="104" text-anchor="middle" font-family="Space Mono" font-size="8" fill="#C7C2D0">push</text>
-          <path d="M68 100 H92" stroke="#37324a" stroke-width="2"/>
-          <rect class="breathe" x="94" y="82" width="44" height="36" rx="8" fill="none" stroke="#7CE0C6"/><text x="116" y="104" text-anchor="middle" font-family="Space Mono" font-size="8" fill="#7CE0C6">claude -p</text>
-          <path d="M140 100 H164" stroke="#37324a" stroke-width="2"/>
-          <rect x="166" y="86" width="30" height="28" rx="7" fill="#221f2e" stroke="#37324a"/><text x="181" y="104" text-anchor="middle" font-family="Space Mono" font-size="8" fill="#948DA6">✓</text>
+      <div class="fig" data-fig="3" data-cap="<b>Fig.</b> decision · reason · suppressOutput · continue">
+        <svg viewBox="0 0 220 210" fill="none" aria-hidden="true">
+          <rect x="30" y="18" width="160" height="26" rx="7" fill="#221f2e" stroke="#37324a"/><text x="44" y="35" font-family="Space Mono" font-size="10" fill="#7CE0C6">decision</text>
+          <rect x="30" y="52" width="160" height="26" rx="7" fill="#221f2e" stroke="#37324a"/><text x="44" y="69" font-family="Space Mono" font-size="10" fill="#C7C2D0">reason</text>
+          <rect x="30" y="86" width="160" height="26" rx="7" fill="#221f2e" stroke="#37324a"/><text x="44" y="103" font-family="Space Mono" font-size="10" fill="#948DA6">suppressOutput</text>
+          <rect class="breathe" x="30" y="120" width="160" height="26" rx="7" fill="none" stroke="#F2B45C"/><text x="44" y="137" font-family="Space Mono" font-size="10" fill="#F2B45C">continue</text>
         </svg>
       </div>
-      <div class="fig" data-fig="4" data-cap="<b>Fig.</b> rápido · idempotente · sem segredo">
+      <div class="fig" data-fig="4" data-cap="<b>Fig.</b> allow · deny · ask">
         <svg viewBox="0 0 220 200" fill="none" aria-hidden="true">
-          <rect class="breathe" x="40" y="40" width="140" height="26" rx="7" fill="none" stroke="#7CE0C6"/><text x="110" y="57" text-anchor="middle" font-family="Space Mono" font-size="9" fill="#7CE0C6">rápido</text>
-          <rect class="breathe" x="40" y="76" width="140" height="26" rx="7" fill="none" stroke="#7CE0C6" style="animation-delay:.3s"/><text x="110" y="93" text-anchor="middle" font-family="Space Mono" font-size="9" fill="#7CE0C6">idempotente</text>
-          <rect class="breathe" x="40" y="112" width="140" height="26" rx="7" fill="none" stroke="#F2B45C" style="animation-delay:.6s"/><text x="110" y="129" text-anchor="middle" font-family="Space Mono" font-size="9" fill="#F2B45C">sem vazar segredo</text>
+          <circle cx="55" cy="100" r="26" fill="none" stroke="#7CE0C6"/><text x="55" y="104" text-anchor="middle" font-family="Space Mono" font-size="9" fill="#7CE0C6">allow</text>
+          <circle cx="120" cy="100" r="26" fill="none" stroke="#F2B45C"/><text x="120" y="104" text-anchor="middle" font-family="Space Mono" font-size="9" fill="#F2B45C">deny</text>
+          <circle class="breathe" cx="180" cy="60" r="18" fill="none" stroke="#C7C2D0"/><text x="180" y="64" text-anchor="middle" font-family="Space Mono" font-size="9" fill="#C7C2D0">ask</text>
         </svg>
       </div>
     </div>
@@ -1055,15 +1120,16 @@ echo ".claude/settings.local.json" &gt;&gt; .gitignore</pre></div>
   </div></aside>
 </div>
 
-<nav class="lnav"><a href="#aula-4">← Aula 4</a><a href="#trilha">Voltar à trilha ✓ →</a></nav>
-<footer>Aula 5 de 5 · Trilha 03 · Automação &amp; Hooks · fim da trilha · INEMA.CLUB PRO</footer>
+<nav class="lnav"><a href="#aula-4">← Aula 4</a><a href="curso-guardrails.html#trilha">Trilha 02 · Guardrails →</a></nav>
+<footer>Aula 5 de 5 · Trilha 01 · Fundamentos · INEMA.CLUB PRO</footer>
 
 <script type="application/json" id="cards-5">
 [
-  {"front":"Onde versionar hooks para o time herdar?","back":"No .claude/settings.json (vai pro Git); o .local.json fica só na sua máquina."},
-  {"front":"Por que dá pra confiar segurança a um hook?","back":"Ele é determinístico: mesma entrada, mesmo resultado — sempre executa, não é sugestão."},
-  {"front":"Os hooks valem no modo headless / CI?","back":"Sim — continuam valendo em claude -p e em pipeline."},
-  {"front":"Três regras de higiene de um hook?","back":"Rápido, idempotente e sem vazar segredo (e falhar com mensagem clara no stderr)."}
+  {"front":"Quais os dois jeitos de um hook responder?","back":"Exit code (simples) e JSON impresso no stdout (mais expressivo: decisão + motivo)."},
+  {"front":"O que exit 1 ou exit 3+ significam?","back":"Erro não-bloqueante (fail-open): a ação segue normalmente, mesmo com o hook falhando."},
+  {"front":"Qual campo do JSON de saída carrega o motivo em texto?","back":"reason."},
+  {"front":"Quais as três posturas de permissionDecision?","back":"allow (libera), deny (barra, como exit 2) e ask (pausa e pede confirmação)."},
+  {"front":"Por que design hooks para 'fail-open'?","back":"Um hook malformado não deve travar o Claude Code inteiro — o pior cenário deve ser o hook não fazer nada."}
 ]
 </script>
 </section>

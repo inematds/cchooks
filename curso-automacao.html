@@ -1,0 +1,850 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="curso" content="cchooks:auto">
+<title>Automação · Hooks do Claude Code · INEMA.CLUB PRO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/aula.css">
+<script>(function(){try{var m=document.querySelector('meta[name=curso]');var CK=(m&&m.content)||'v4:curso';var s=JSON.parse(localStorage.getItem(CK));if(s&&s.prefs&&s.prefs.theme)document.documentElement.setAttribute('data-theme',s.prefs.theme);}catch(e){}})();</script>
+<style>
+  /* ---- roteador de página única ---- */
+  .view{display:none}
+  .view.active{display:block}
+
+  /* ---- navegação entre aulas (rodapé de cada aula) ---- */
+  .lnav{max-width:1160px;margin:0 auto 5vh;padding:0 clamp(24px,5vw,60px);display:flex;justify-content:space-between;gap:12px}
+  .lnav a{font-family:var(--mono);font-size:12px;color:var(--muted);text-decoration:none;border:1px solid var(--line2);border-radius:12px;padding:12px 16px;transition:border-color .2s,color .2s}
+  .lnav a:hover{border-color:var(--accent);color:var(--ink)}
+  .lnav a.dis{opacity:.4;pointer-events:none}
+
+  /* ---- VIEW DA TRILHA (escopo #v-trilha) ---- */
+  #v-trilha .wrap{max-width:1080px;margin:0 auto;padding:0 clamp(24px,5vw,60px)}
+  #v-trilha .t-hero{position:relative;overflow:hidden;padding:20vh 0 8vh;border-bottom:1px solid var(--line)}
+  #v-trilha .t-hero::before{content:"";position:absolute;inset:0;z-index:0;background:radial-gradient(48% 44% at 84% 12%,rgba(124,224,198,.18),transparent 60%),radial-gradient(42% 40% at 6% 92%,rgba(242,180,92,.10),transparent 55%);animation:drift 24s ease-in-out infinite alternate}
+  #v-trilha .t-hero > *{position:relative;z-index:2}
+  #v-trilha .crumb{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--faint);margin:0 0 20px}
+  #v-trilha .crumb a{text-decoration:none;color:var(--muted)}
+  #v-trilha .crumb a:hover{color:var(--accent)}
+  #v-trilha h1{font-family:var(--serif);font-weight:500;font-size:clamp(40px,6.4vw,72px);line-height:1.0;letter-spacing:-.025em;margin:0 0 22px}
+  #v-trilha h1 em{font-style:italic;color:var(--accent)}
+  #v-trilha .lead{font-family:var(--serif);font-size:clamp(19px,2.1vw,24px);line-height:1.5;color:var(--ink-soft);max-width:46ch;margin:0 0 30px}
+  #v-trilha .statcards{display:flex;gap:14px;flex-wrap:wrap}
+  #v-trilha .sc{border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:16px 22px;min-width:120px}
+  #v-trilha .sc b{font-family:var(--serif);font-weight:500;font-size:28px;color:var(--ink);display:block;line-height:1}
+  #v-trilha .sc span{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:6px;display:block}
+  #v-trilha section{padding:8vh 0;border-bottom:none}
+  #v-trilha .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin:0 0 8px}
+  #v-trilha h2{display:block;font-family:var(--serif);font-weight:500;font-size:clamp(26px,3.6vw,38px);letter-spacing:-.015em;line-height:1.1;margin:0 0 28px}
+  #v-trilha h2 em{font-style:italic;color:var(--accent)}
+  #v-trilha .aulas{display:grid;gap:14px}
+  #v-trilha .au{display:grid;grid-template-columns:56px 1fr auto;gap:20px;align-items:center;text-decoration:none;color:inherit;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px 24px;transition:border-color .2s,transform .2s}
+  #v-trilha .au.on:hover{border-color:var(--accent);transform:translateY(-2px)}
+  #v-trilha .au .num{font-family:var(--serif);font-size:30px;color:var(--accent);line-height:1;text-align:center}
+  #v-trilha .au h3{font-family:var(--serif);font-weight:500;font-size:21px;margin:0 0 5px;letter-spacing:-.01em}
+  #v-trilha .au p{margin:0;color:var(--muted);font-size:14.5px}
+  #v-trilha .au .meta{font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--accent);white-space:nowrap;text-align:right}
+  #v-trilha .au .prog{position:static;margin-top:10px;height:5px;border-radius:99px;background:var(--line);overflow:hidden;max-width:220px;width:auto;z-index:auto}
+  #v-trilha .au .prog i{display:block;height:100%;width:100%;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .5s}
+  #v-trilha .nav{display:flex;justify-content:space-between;gap:12px;border-top:1px solid var(--line);padding-top:6vh;margin-top:2vh}
+  #v-trilha .nav a{font-family:var(--mono);font-size:12px;color:var(--muted);text-decoration:none;border:1px solid var(--line2);border-radius:12px;padding:14px 18px}
+  #v-trilha .nav a:hover{border-color:var(--accent);color:var(--ink)}
+  #v-trilha .nav a.dis{opacity:.4;pointer-events:none}
+  #v-trilha footer{max-width:1080px;margin:0 auto;padding:6vh clamp(24px,5vw,60px) 12vh;color:var(--faint);font-size:14px;text-align:center;font-family:var(--serif);font-style:italic;border-top:1px solid var(--line)}
+  @media(max-width:640px){#v-trilha .au{grid-template-columns:44px 1fr;gap:14px}#v-trilha .au .meta{grid-column:2;text-align:left;margin-top:6px}}
+</style>
+</head>
+<body>
+<div class="bar"><div class="bar-inner">
+  <span class="brand"><a class="mark" href="https://inema.club" target="_blank" rel="noopener">INEMA.CLUB</a><a class="pro" href="https://inema.pro" target="_blank" rel="noopener">PRO</a><a class="course" href="landing.html">Hooks do Claude Code</a></span>
+  <a class="back" href="#trilha" style="display:none">← trilha</a>
+  <button id="pill" class="pill" style="display:none">0 lido</button>
+  <button id="revbtn">revisar <span id="revn">0</span></button>
+  <button id="jorbtn">jornada</button>
+  <button id="helpbtn" aria-label="Como o curso funciona">?</button>
+  <button id="prefsbtn" aria-label="Preferências de leitura">Aa</button>
+  <button id="themebtn">tema: escuro</button>
+</div>
+<div class="subnav"><div class="subnav-inner">
+  <a href="curso.html#trilha">01 Fundamentos</a>
+  <a href="curso-guardrails.html#trilha">02 Guardrails</a>
+  <a href="curso-automacao.html#trilha" class="cur">03 Automação</a>
+  <a href="curso-time.html#trilha">04 Equipe &amp; CI</a>
+</div></div>
+</div>
+
+<!-- ===================== VIEW: TRILHA ===================== -->
+<section class="view" id="v-trilha">
+  <header class="t-hero"><div class="wrap">
+    <p class="crumb"><a href="landing.html">Hooks do Claude Code</a> / Trilha 03</p>
+    <p class="kicker">Trilha 03 · Automação</p>
+    <h1>Regras que <em>rodam</em><br>sozinhas</h1>
+    <p class="lead">Quatro hooks prontos pra colar: formatar ao salvar, avisar quando terminar, registrar cada comando e injetar contexto assim que a sessão abre.</p>
+    <div class="statcards">
+      <div class="sc"><b>4</b><span>aulas</span></div>
+      <div class="sc"><b>~36</b><span>minutos</span></div>
+      <div class="sc"><b>intermediário</b><span>nível</span></div>
+    </div>
+  </div></header>
+
+  <section><div class="wrap">
+    <p class="eyebrow">Aulas desta trilha</p>
+    <h2>Hooks que <em>trabalham</em> por você</h2>
+    <div class="aulas">
+
+      <a class="au on" data-aula="1" href="#aula-1">
+        <div class="num">1</div>
+        <div>
+          <h3>Formatar ao salvar</h3>
+          <p>PostToolUse pega o arquivo recém-editado e roda o formatador — prettier, black, gofmt — sem você lembrar.</p>
+          <div class="prog"><i></i></div>
+        </div>
+        <div class="meta">4 seções · abrir →</div>
+      </a>
+
+      <a class="au on" data-aula="2" href="#aula-2">
+        <div class="num">2</div>
+        <div>
+          <h3>Avisar quando terminar</h3>
+          <p>Stop e Notification disparam o aviso certo na hora certa — sem vigiar o terminal esperando o Claude acabar.</p>
+          <div class="prog"><i></i></div>
+        </div>
+        <div class="meta">4 seções · abrir →</div>
+      </a>
+
+      <a class="au on" data-aula="3" href="#aula-3">
+        <div class="num">3</div>
+        <div>
+          <h3>Registrar os comandos</h3>
+          <p>PreToolUse em Bash grava cada comando com hora num log — um diário simples de auditoria.</p>
+          <div class="prog"><i></i></div>
+        </div>
+        <div class="meta">4 seções · abrir →</div>
+      </a>
+
+      <a class="au on" data-aula="4" href="#aula-4">
+        <div class="num">4</div>
+        <div>
+          <h3>Injetar contexto no começo</h3>
+          <p>SessionStart entrega branch, git status e as regras do projeto assim que a sessão abre. Capstone da trilha.</p>
+          <div class="prog"><i></i></div>
+        </div>
+        <div class="meta">4 seções · abrir →</div>
+      </a>
+
+    </div>
+
+    <div class="nav">
+      <a href="curso-guardrails.html#trilha">← Trilha 02 · Guardrails</a>
+      <a href="curso-time.html#trilha">Trilha 04 · Equipe &amp; CI →</a>
+    </div>
+  </div></section>
+
+  <footer><div class="wrap">Trilha 03 · Automação · INEMA.CLUB PRO</div></footer>
+</section>
+
+<!-- ===================== VIEW: AULA 1 ===================== -->
+<section class="view" id="v-aula-1" data-aula="1">
+<header class="hero"><div class="hero-inner">
+  <div>
+    <p class="kicker">Trilha 03 · Aula 1 · Intermediário</p>
+    <h1>Formatar<br>ao <em>salvar</em></h1>
+    <p class="lead">Depois que o Claude edita um arquivo, um hook roda o formatador nele — sem você lembrar, sem exceção.</p>
+    <p class="cue"><span class="arw">↓</span> role para estudar</p>
+  </div>
+  <div class="herofig">
+    <svg viewBox="0 0 300 240" fill="none" aria-hidden="true">
+      <rect x="20" y="55" width="96" height="120" rx="10" fill="#15131d" stroke="#37324a" stroke-width="1.5"/>
+      <line x1="34" y1="80" x2="92" y2="80" stroke="#948DA6" stroke-width="3"/>
+      <line x1="34" y1="98" x2="76" y2="98" stroke="#948DA6" stroke-width="3"/>
+      <line x1="34" y1="116" x2="100" y2="116" stroke="#948DA6" stroke-width="3"/>
+      <line x1="34" y1="134" x2="66" y2="134" stroke="#948DA6" stroke-width="3"/>
+      <path class="pulse" d="M154 60 l-9 18 h8 l-3 14 12 -19 h-8z" fill="#F2B45C"/>
+      <path class="breathe" d="M126 115 H174" stroke="#7CE0C6" stroke-width="2"/><path d="M174 109 l10 6 -10 6z" fill="#7CE0C6"/>
+      <rect x="184" y="55" width="96" height="120" rx="10" fill="#15131d" stroke="#7CE0C6" stroke-width="1.5"/>
+      <line x1="198" y1="80" x2="266" y2="80" stroke="#7CE0C6" stroke-width="3"/>
+      <line x1="198" y1="98" x2="266" y2="98" stroke="#7CE0C6" stroke-width="3"/>
+      <line x1="198" y1="116" x2="266" y2="116" stroke="#7CE0C6" stroke-width="3"/>
+      <path d="M210 140 l9 9 18 -20" stroke="#7CE0C6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <text x="150" y="212" text-anchor="middle" font-family="Newsreader, serif" font-style="italic" font-size="15" fill="#C7C2D0">o formatador roda sozinho</text>
+    </svg>
+  </div>
+</div></header>
+
+<div class="layout">
+  <div class="col">
+    <section class="step" data-fig="1">
+      <h2><span class="n">01</span> PostToolUse em Edit|Write</h2>
+      <p>O hook mora no evento <b class="gterm" tabindex="0" data-def="Evento que dispara DEPOIS de uma ferramenta terminar de rodar. Não bloqueia (exit 2 aqui só reporta erro) — ideal pra formatar o arquivo recém-editado.">PostToolUse</b>: ele dispara <b>depois</b> que o Claude termina de editar ou escrever um arquivo — a ação já aconteceu, é hora de arrumar a casa.</p>
+      <p>O <code>matcher</code> filtra em quais ferramentas o hook pega: <code>"Edit|Write"</code> pega as duas — edição de um arquivo existente ou escrita de um novo.</p>
+      <pre>{ "hooks": { <span class="k">"PostToolUse"</span>: [ {
+  "matcher": "Edit|Write",
+  "hooks": [ { "type": "command",
+    "command": "f=$(jq -r .tool_input.file_path); prettier --write \"$f\"" } ]
+} ] } }</pre>
+      <p>Leia de dentro pra fora: no evento <b>PostToolUse</b>, quando a ferramenta for <b>Edit ou Write</b>, roda o <b>comando</b>. Simples — e some da sua cabeça pra sempre.</p>
+      <div class="mobfig" data-mobfig="1"></div>
+      <div class="quiz" data-answer="a">
+        <p class="qk">Teste-se</p>
+        <p class="q">Qual evento roda DEPOIS de uma ferramenta terminar de rodar?</p>
+        <button class="opt" data-k="a" data-fb="Post = depois. A ação já aconteceu; é o momento certo pra formatar o arquivo.">PostToolUse</button>
+        <button class="opt" data-k="b">PreToolUse</button>
+        <button class="opt" data-k="c">Notification</button>
+        <p class="qfb"></p>
+      </div>
+      <button class="readbtn" data-read="s1">marcar como lido</button>
+    </section>
+
+    <section class="step" data-fig="2">
+      <h2><span class="n">02</span> Pegar o arquivo</h2>
+      <p>O hook não sabe de antemão qual arquivo foi tocado — ele lê no JSON do <code>stdin</code>, campo <b class="gterm" tabindex="0" data-def="Campo do JSON de entrada com o caminho do arquivo que foi editado ou escrito pela ferramenta.">tool_input.file_path</b>. Com <code>jq</code>, isso vira uma variável de shell:</p>
+      <pre><span class="c"># lê o arquivo que acabou de ser editado</span>
+file=$(jq -r '.tool_input.file_path')</pre>
+      <p>É esse <code>$file</code> que vai pro formatador na próxima seção. Sem ele, o hook não saberia em cima de qual arquivo agir.</p>
+      <div class="mobfig" data-mobfig="2"></div>
+      <button class="readbtn" data-read="s2">marcar como lido</button>
+    </section>
+
+    <section class="step" data-fig="3">
+      <h2><span class="n">03</span> Rodar o formatador</h2>
+      <p>Com o caminho em mãos, escolha o formatador pela extensão do arquivo. Um <code>case</code> resolve pra qualquer stack:</p>
+      <pre>case "$file" in
+  *.js|*.ts|*.jsx|*.tsx) prettier --write "$file" ;;
+  *.py) black -q "$file" ;;
+  *.go) gofmt -w "$file" ;;
+esac</pre>
+      <p>Troque pelos formatadores do seu projeto. O ponto não é qual ferramenta — é que ela roda <b>sempre</b>, em <b>todo</b> arquivo, sem exceção humana.</p>
+      <div class="mobfig" data-mobfig="3"></div>
+      <div class="quiz" data-answer="c">
+        <p class="qk">Teste-se</p>
+        <p class="q">Pra formatar um arquivo <code>.py</code>, qual linha do <code>case</code> entra em ação?</p>
+        <button class="opt" data-k="a">*.js|*.ts|*.jsx|*.tsx) prettier --write "$file" ;;</button>
+        <button class="opt" data-k="b">*.go) gofmt -w "$file" ;;</button>
+        <button class="opt" data-k="c" data-fb="A extensão .py casa com esse ramo do case — cada stack tem seu formatador.">*.py) black -q "$file" ;;</button>
+        <p class="qfb"></p>
+      </div>
+      <button class="readbtn" data-read="s3">marcar como lido</button>
+    </section>
+
+    <section class="step" data-fig="4">
+      <h2><span class="n">04</span> Silencioso e idempotente</h2>
+      <p>Um hook de formatação não deve <b>bloquear</b> nada: sempre <code>exit 0</code>. E cuidado com uma pegadinha — no <code>PostToolUse</code>, um <code>exit 2</code> <b>não desfaz</b> a edição (a ferramenta já rodou); ele só reporta um erro.</p>
+      <p>Pra não poluir o contexto quando tudo deu certo, use <b class="gterm" tabindex="0" data-def="Campo do JSON de saída do hook. Quando true, evita que a saída do hook apareça poluindo o contexto quando tudo correu bem.">suppressOutput</b>:</p>
+      <pre>{ "suppressOutput": true }</pre>
+      <p>E o formatador precisa ser <b>idempotente</b>: rodar duas vezes sobre o mesmo arquivo não pode quebrar nada — mesma entrada, mesmo resultado, sempre.</p>
+      <div class="mobfig" data-mobfig="4"></div>
+      <details>
+        <summary>Indo mais fundo</summary>
+        <p>Só <code>PreToolUse</code> e <code>Stop</code> conseguem barrar algo com <code>exit 2</code>. No <code>PostToolUse</code>, esse mesmo código é tratado como erro não-bloqueante — a ação já ocorreu, não tem como voltar atrás.</p>
+      </details>
+      <div class="quiz" data-answer="b">
+        <p class="qk">Teste-se</p>
+        <p class="q">Se um hook <code>PostToolUse</code> sai com <code>exit 2</code>, o que acontece?</p>
+        <button class="opt" data-k="a">a edição do arquivo é desfeita</button>
+        <button class="opt" data-k="b" data-fb="A ferramenta já rodou antes do PostToolUse disparar. exit 2 aqui só reporta um erro — não bloqueia nem desfaz nada.">nada é desfeito — a ferramenta já rodou; só reporta um erro</button>
+        <button class="opt" data-k="c">o Claude encerra a sessão inteira</button>
+        <p class="qfb"></p>
+      </div>
+      <button class="readbtn" data-read="s4">marcar como lido</button>
+    </section>
+
+    <section class="practice" data-practice="p1">
+      <p class="pk">Pratique agora <span class="pcount">0/4 feito</span></p>
+      <h3 class="ph">Prettier no arquivo recém-editado</h3>
+      <p class="pgoal">Faça o Claude formatar sozinho todo arquivo que ele editar. ~5 min, seguro: só formata, não bloqueia nada.</p>
+      <div class="pcodewrap"><button class="pcopy" type="button">copiar</button><pre class="pcode">{
+  <span class="k">"hooks"</span>: {
+    <span class="k">"PostToolUse"</span>: [
+      {
+        <span class="k">"matcher"</span>: "Edit|Write",
+        <span class="k">"hooks"</span>: [
+          { "type": "command", "command": "f=$(jq -r '.tool_input.file_path'); command -v prettier &gt;/dev/null &amp;&amp; prettier --write \"$f\" 2&gt;/dev/null; exit 0" }
+        ]
+      }
+    ]
+  }
+}</pre></div>
+      <ol class="psteps">
+        <li><label><input type="checkbox" data-ptask="1"> Crie ou abra o <code>.claude/settings.json</code> na raiz do projeto.</label></li>
+        <li><label><input type="checkbox" data-ptask="2"> Cole o bloco acima e salve.</label></li>
+        <li><label><input type="checkbox" data-ptask="3"> Peça ao Claude pra editar um arquivo <code>.js</code> ou <code>.ts</code> qualquer.</label></li>
+        <li><label><input type="checkbox" data-ptask="4"> Confira o arquivo (ou rode <code>git diff</code>) — ele já saiu formatado.</label></li>
+      </ol>
+      <p class="pdone">✓ Fechamento: o código sai sempre limpo — o formatador virou parte do fluxo, não uma tarefa manual que dá pra esquecer.</p>
+    </section>
+  </div>
+
+  <aside class="rail"><div class="railsticky">
+    <div class="figstage">
+      <div class="fig on" data-fig="1" data-cap="<b>Fig.</b> ferramenta termina → PostToolUse dispara">
+        <svg viewBox="0 0 220 200" fill="none" aria-hidden="true">
+          <rect x="20" y="82" width="60" height="36" rx="8" fill="#221f2e" stroke="#37324a"/><text x="50" y="104" text-anchor="middle" font-family="Space Mono" font-size="9" fill="#C7C2D0">Edit</text>
+          <path d="M84 100 l8 8 14 -16" stroke="#7CE0C6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <path class="breathe" d="M112 100 H150" stroke="#7CE0C6" stroke-width="2"/><path d="M150 94 l10 6 -10 6z" fill="#7CE0C6"/>
+          <rect x="162" y="82" width="46" height="36" rx="8" fill="none" stroke="#7CE0C6"/><text x="185" y="104" text-anchor="middle" font-family="Space Mono" font-size="8" fill="#7CE0C6">Post</text>
+        </svg>
+      </div>
+      <div class="fig" data-fig="2" data-cap="<b>Fig.</b> stdin → jq → tool_input.file_path">
+        <svg viewBox="0 0 220 200" fill="none" aria-hidden="true">
+          <rect x="20" y="66" width="70" height="70" rx="10" fill="#15131d" stroke="#37324a"/>
+          <text x="30" y="90" font-family="Space Mono" font-size="8" fill="#948DA6">tool_input</text>
+          <text x="30" y="106" font-family="Space Mono" font-size="8" fill="#7CE0C6">.file_path</text>
+          <path class="breathe" d="M94 100 H126" stroke="#7CE0C6" stroke-width="2"/><path d="M126 94 l10 6 -10 6z" fill="#7CE0C6"/>
+          <rect x="138" y="82" width="40" height="36" rx="8" fill="#221f2e" stroke="#37324a"/><text x="158" y="105" text-anchor="middle" font-family="Space Mono" font-size="10" fill="#7CE0C6">jq</text>
+          <text x="158" y="150" text-anchor="middle" font-family="Space Mono" font-size="8" fill="#948DA6">$file</text>
+        </svg>
+      </div>
+      <div class="fig" data-fig="3" data-cap="<b>Fig.</b> extensão decide o formatador">
+        <svg viewBox="0 0 220 200" fill="none" aria-hidden="true">
+          <rect x="16" y="82" width="46" height="34" rx="8" fill="#221f2e" stroke="#37324a"/><text x="39" y="103" text-anchor="middle" font-family="Space Mono" font-size="9" fill="#C7C2D0">$file</text>
+          <path d="M62 92 H90 M62 100 H90 M62 108 H90" stroke="#37324a" stroke-width="1.5"/>
+          <rect class="breathe" x="92" y="40" width="88" height="26" rx="7" fill="none" stroke="#7CE0C6"/><text x="136" y="58" text-anchor="middle" font-family="Space Mono" font-size="9" fill="#7CE0C6">prettier .js</text>
+          <rect class="breathe" x="92" y="88" width="88" height="26" rx="7" fill="none" stroke="#7CE0C6" style="animation-delay:.3s"/><text x="136" y="106" text-anchor="middle" font-family="Space Mono" font-size="9" fill="#7CE0C6">black .py</text>
+          <rect class="breathe" x="92" y="136" width="88" height="26" rx="7" fill="none" stroke="#7CE0C6" style="animation-delay:.6s"/><text x="136" y="154" text-anchor="middle" font-family="Space Mono" font-size="9" fill="#7CE0C6">gofmt .go</text>
+        </svg>
+      </div>
+      <div class="fig" data-fig="4" data-cap="<b>Fig.</b> exit 0 + suppressOutput = silencioso">
+        <svg viewBox="0 0 220 200" fill="none" aria-hidden="true">
+          <rect class="breathe" x="40" y="50" width="140" height="34" rx="8" fill="none" stroke="#7CE0C6"/><text x="110" y="72" text-anchor="middle" font-family="Space Mono" font-size="10" fill="#7CE0C6">exit 0</text>
+          <rect class="breathe" x="40" y="98" width="140" height="34" rx="8" fill="none" stroke="#948DA6" style="animation-delay:.3s"/><text x="110" y="120" text-anchor="middle" font-family="Space Mono" font-size="9" fill="#948DA6">suppressOutput</text>
+          <text x="110" y="164" text-anchor="middle" font-family="Newsreader, serif" font-style="italic" font-size="13" fill="#C7C2D0">roda de novo sem quebrar nada</text>
+        </svg>
+      </div>
+    </div>
+    <p class="railcap"></p>
+    <div class="steps-ind"></div>
+    <p class="sidenote">Grife qualquer trecho do texto para virar um <b>flashcard</b> de revisão — ele aparece em "revisar".</p>
+  </div></aside>
+</div>
+
+<nav class="lnav"><a href="#trilha">← trilha</a><a href="#aula-2">Aula 2 · Avisar quando terminar →</a></nav>
+<footer>Aula 1 de 4 · Trilha 03 · Automação · INEMA.CLUB PRO</footer>
+
+<script type="application/json" id="cards-1">
+[
+  {"front":"Qual evento roda depois de o Claude editar/escrever um arquivo?","back":"PostToolUse."},
+  {"front":"Como o hook descobre qual arquivo foi editado?","back":"Lendo tool_input.file_path do JSON no stdin (via jq)."},
+  {"front":"Um hook PostToolUse que sai com exit 2 bloqueia a edição?","back":"Não — a ferramenta já rodou; exit 2 aqui só reporta erro, não desfaz nada."},
+  {"front":"O que o campo suppressOutput faz num hook?","back":"Evita que a saída do hook apareça poluindo o contexto/UI quando tudo deu certo."},
+  {"front":"Por que o formatador precisa ser idempotente?","back":"Porque pode rodar várias vezes sobre o mesmo arquivo sem quebrar nada — mesma entrada, mesmo resultado."}
+]
+</script>
+</section>
+
+<!-- ===================== VIEW: AULA 2 ===================== -->
+<section class="view" id="v-aula-2" data-aula="2">
+<header class="hero"><div class="hero-inner">
+  <div>
+    <p class="kicker">Trilha 03 · Aula 2 · Intermediário</p>
+    <h1>Avisar quando<br><em>terminar</em></h1>
+    <p class="lead">Dois eventos avisam na hora certa: Stop quando o Claude termina de responder, Notification quando ele precisa de você.</p>
+    <p class="cue"><span class="arw">↓</span> role para estudar</p>
+  </div>
+  <div class="herofig">
+    <svg viewBox="0 0 300 240" fill="none" aria-hidden="true">
+      <path class="breathe" d="M150 46 c-26 0 -40 18 -40 44 c0 34 -10 40 -18 50 h116 c-8 -10 -18 -16 -18 -50 c0 -26 -14 -44 -40 -44z" fill="none" stroke="#F2B45C" stroke-width="2.5"/>
+      <circle cx="150" cy="152" r="9" fill="none" stroke="#F2B45C" stroke-width="2.5"/>
+      <circle cx="230" cy="70" r="26" fill="#15131d" stroke="#37324a" stroke-width="1.5"/>
+      <line class="pulse" x1="230" y1="70" x2="230" y2="54" stroke="#7CE0C6" stroke-width="2"/>
+      <line class="pulse" x1="230" y1="70" x2="242" y2="76" stroke="#7CE0C6" stroke-width="2"/>
+      <text x="150" y="216" text-anchor="middle" font-family="Newsreader, serif" font-style="italic" font-size="15" fill="#C7C2D0">o aviso chega na hora certa</text>
+    </svg>
+  </div>
+</div></header>
+
+<div class="layout">
+  <div class="col">
+    <section class="step" data-fig="1">
+      <h2><span class="n">01</span> Stop e Notification</h2>
+      <p>Dois eventos avisam de coisas diferentes. <b class="gterm" tabindex="0" data-def="Evento que dispara quando o Claude termina de responder num turno. É um dos dois eventos que podem bloquear com exit 2.">Stop</b> dispara quando o Claude <b>termina de responder</b> — o turno acabou. Já <b class="gterm" tabindex="0" data-def="Evento que dispara quando o Claude precisa de você: idle 60s+, pedido de permissão, ou elicitação de um servidor MCP.">Notification</b> dispara quando ele <b>precisa de você</b>: ficou parado 60s+, pediu uma permissão, ou um MCP está esperando uma resposta.</p>
+      <p>A diferença importa: <code>Stop</code> é "acabei"; <code>Notification</code> é "estou esperando você". Cada um pede um tipo de aviso diferente.</p>
+      <div class="mobfig" data-mobfig="1"></div>
+      <div class="quiz" data-answer="c">
+        <p class="qk">Teste-se</p>
+        <p class="q">Qual evento dispara quando o Claude precisa de uma permissão sua (ou fica parado 60s+)?</p>
+        <button class="opt" data-k="a">Stop</button>
+        <button class="opt" data-k="b">SessionStart</button>
+        <button class="opt" data-k="c" data-fb="Notification cobre idle 60s+, permission_prompt e elicitação de MCP — é o aviso de 'preciso de você'.">Notification</button>
+        <p class="qfb"></p>
+      </div>
+      <button class="readbtn" data-read="s1">marcar como lido</button>
+    </section>
+
+    <section class="step" data-fig="2">
+      <h2><span class="n">02</span> Disparar notify-send / um som</h2>
+      <p>Pendure um aviso de desktop no evento que interessa. No Linux, <code>notify-send</code> resolve:</p>
+      <pre><span class="c"># Stop → notificação de desktop (linux)</span>
+notify-send "Claude Code" "terminou de responder"</pre>
+      <p>Um som curto (<code>paplay</code>, <code>afplay</code>) também funciona, e é mais discreto que um popup. O importante: você <b>para de vigiar</b> o terminal.</p>
+      <div class="mobfig" data-mobfig="2"></div>
+      <button class="readbtn" data-read="s2">marcar como lido</button>
+    </section>
+
+    <section class="step" data-fig="3">
+      <h2><span class="n">03</span> Só quando importa</h2>
+      <p>O evento <code>Notification</code> dispara por vários motivos — <b class="gterm" tabindex="0" data-def="Campo do JSON de entrada do evento Notification: permission_prompt, idle_prompt, auth_success ou elicitation_dialog.">notification_type</b> diz qual. Se você notificar em <b>todos</b>, vira spam. Filtre pelo que realmente precisa de você:</p>
+      <pre>type=$(jq -r '.notification_type')
+[ "$type" = "permission_prompt" ] || exit 0
+notify-send "Claude Code" "precisa de permissão" --urgency=critical</pre>
+      <p>Assim só o pedido de permissão dispara o alerta crítico — o resto (idle, elicitação) você decide se quer ou não, sem tocar em tudo o tempo todo.</p>
+      <div class="mobfig" data-mobfig="3"></div>
+      <div class="quiz" data-answer="a">
+        <p class="qk">Teste-se</p>
+        <p class="q">Pra notificar só quando for pedido de permissão (e ignorar o resto), você filtra por:</p>
+        <button class="opt" data-k="a" data-fb="notification_type diz o motivo do disparo: permission_prompt, idle_prompt, auth_success ou elicitation_dialog.">notification_type</button>
+        <button class="opt" data-k="b">tool_name</button>
+        <button class="opt" data-k="c">session_id</button>
+        <p class="qfb"></p>
+      </div>
+      <button class="readbtn" data-read="s3">marcar como lido</button>
+    </section>
+
+    <section class="step" data-fig="4">
+      <h2><span class="n">04</span> Variações por SO</h2>
+      <p>O comando de notificação muda com o sistema. Um <code>case</code> em cima de <code>uname</code> cobre os três:</p>
+      <pre>case "$(uname)" in
+  Linux)  notify-send "Claude Code" "terminou" ;;
+  Darwin) osascript -e 'display notification "terminou" with title "Claude Code"' ;;
+  *)      powershell.exe -Command "New-BurntToastNotification -Text 'Claude Code','terminou'" ;;
+esac</pre>
+      <p>No Windows (via WSL), chamar o <code>powershell.exe</code> de dentro do Linux costuma ser o caminho mais direto.</p>
+      <div class="mobfig" data-mobfig="4"></div>
+      <details>
+        <summary>Indo mais fundo</summary>
+        <p>Prefere som a popup? Troque o <code>notify-send</code>/<code>osascript</code> por <code>paplay algum.wav</code> (Linux) ou <code>afplay algum.wav</code> (macOS) — mais discreto, funciona igual como sinal de "terminou".</p>
+      </details>
+      <button class="readbtn" data-read="s4">marcar como lido</button>
+    </section>
+
+    <section class="practice" data-practice="p2">
+      <p class="pk">Pratique agora <span class="pcount">0/4 feito</span></p>
+      <h3 class="ph">Notificação de desktop no evento Stop</h3>
+      <p class="pgoal">Deixe o Claude te avisar com um popup toda vez que terminar de responder. ~5 min, seguro (só observa, não bloqueia).</p>
+      <div class="pcodewrap"><button class="pcopy" type="button">copiar</button><pre class="pcode">{
+  <span class="k">"hooks"</span>: {
+    <span class="k">"Stop"</span>: [
+      {
+        <span class="k">"hooks"</span>: [
+          { "type": "command", "command": "command -v notify-send &gt;/dev/null &amp;&amp; notify-send 'Claude Code' 'terminou de responder'; exit 0" }
+        ]
+      }
+    ]
+  }
+}</pre></div>
+      <ol class="psteps">
+        <li><label><input type="checkbox" data-ptask="1"> Cole o bloco no seu <code>.claude/settings.json</code> e salve.</label></li>
+        <li><label><input type="checkbox" data-ptask="2"> Sem <code>notify-send</code>? Troque o comando pelo equivalente do seu SO (passo 04).</label></li>
+        <li><label><input type="checkbox" data-ptask="3"> Deixe o Claude terminar de responder qualquer pergunta.</label></li>
+        <li><label><input type="checkbox" data-ptask="4"> Confirme que o popup de desktop apareceu na hora certa.</label></li>
+      </ol>
+      <p class="pdone">✓ Fechamento: você não fica mais vigiando o terminal — o aviso vem até você.</p>
+    </section>
+  </div>
+
+  <aside class="rail"><div class="railsticky">
+    <div class="figstage">
+      <div class="fig on" data-fig="1" data-cap="<b>Fig.</b> Stop = terminou · Notification = precisa de você">
+        <svg viewBox="0 0 220 200" fill="none" aria-hidden="true">
+          <line x1="20" y1="100" x2="200" y2="100" stroke="#37324a" stroke-width="1.5"/>
+          <circle class="breathe" cx="80" cy="100" r="6" fill="#C7C2D0"/><text x="80" y="80" text-anchor="middle" font-family="Space Mono" font-size="8" fill="#C7C2D0">idle/ask</text><text x="80" y="122" text-anchor="middle" font-family="Space Mono" font-size="8" fill="#948DA6">Notification</text>
+          <circle class="breathe" cx="160" cy="100" r="6" fill="#F2B45C" style="animation-delay:.4s"/><text x="160" y="80" text-anchor="middle" font-family="Space Mono" font-size="8" fill="#F2B45C">fim do turno</text><text x="160" y="122" text-anchor="middle" font-family="Space Mono" font-size="8" fill="#948DA6">Stop</text>
+        </svg>
+      </div>
+      <div class="fig" data-fig="2" data-cap="<b>Fig.</b> evento → notify-send / som">
+        <svg viewBox="0 0 220 200" fill="none" aria-hidden="true">
+          <circle cx="50" cy="100" r="20" fill="none" stroke="#F2B45C"/><text x="50" y="104" text-anchor="middle" font-family="Space Mono" font-size="8" fill="#F2B45C">Stop</text>
+          <path class="breathe" d="M74 100 H112" stroke="#7CE0C6" stroke-width="2"/><path d="M112 94 l10 6 -10 6z" fill="#7CE0C6"/>
+          <path d="M160 70 c-14 0 -22 10 -22 26 c0 18 -6 22 -10 28h64c-4 -6 -10 -10 -10 -28c0 -16 -8 -26 -22 -26z" fill="none" stroke="#7CE0C6" stroke-width="2"/>
+          <circle cx="160" cy="132" r="5" fill="none" stroke="#7CE0C6" stroke-width="2"/>
+        </svg>
+      </div>
+      <div class="fig" data-fig="3" data-cap="<b>Fig.</b> só permission_prompt passa">
+        <svg viewBox="0 0 220 200" fill="none" aria-hidden="true">
+          <rect class="breathe" x="30" y="36" width="150" height="26" rx="7" fill="none" stroke="#F2B45C"/><text x="105" y="54" text-anchor="middle" font-family="Space Mono" font-size="9" fill="#F2B45C">permission_prompt</text>
+          <rect x="30" y="76" width="150" height="26" rx="7" fill="#221f2e" stroke="#37324a"/><text x="105" y="94" text-anchor="middle" font-family="Space Mono" font-size="9" fill="#6C6580">idle_prompt</text>
+          <rect x="30" y="116" width="150" height="26" rx="7" fill="#221f2e" stroke="#37324a"/><text x="105" y="134" text-anchor="middle" font-family="Space Mono" font-size="9" fill="#6C6580">elicitation_dialog</text>
+          <text x="105" y="172" text-anchor="middle" font-family="Newsreader, serif" font-style="italic" font-size="12" fill="#C7C2D0">o resto você ignora</text>
+        </svg>
+      </div>
+      <div class="fig" data-fig="4" data-cap="<b>Fig.</b> notify-send · osascript · powershell">
+        <svg viewBox="0 0 220 200" fill="none" aria-hidden="true">
+          <rect class="breathe" x="20" y="40" width="180" height="28" rx="7" fill="none" stroke="#7CE0C6"/><text x="110" y="59" text-anchor="middle" font-family="Space Mono" font-size="9" fill="#7CE0C6">notify-send (linux)</text>
+          <rect class="breathe" x="20" y="84" width="180" height="28" rx="7" fill="none" stroke="#7CE0C6" style="animation-delay:.3s"/><text x="110" y="103" text-anchor="middle" font-family="Space Mono" font-size="9" fill="#7CE0C6">osascript (mac)</text>
+          <rect class="breathe" x="20" y="128" width="180" height="28" rx="7" fill="none" stroke="#F2B45C" style="animation-delay:.6s"/><text x="110" y="147" text-anchor="middle" font-family="Space Mono" font-size="9" fill="#F2B45C">powershell (win)</text>
+        </svg>
+      </div>
+    </div>
+    <p class="railcap"></p>
+    <div class="steps-ind"></div>
+    <p class="sidenote">Grife qualquer trecho do texto para virar um <b>flashcard</b> de revisão.</p>
+  </div></aside>
+</div>
+
+<nav class="lnav"><a href="#aula-1">← Aula 1</a><a href="#aula-3">Aula 3 · Registrar os comandos →</a></nav>
+<footer>Aula 2 de 4 · Trilha 03 · Automação · INEMA.CLUB PRO</footer>
+
+<script type="application/json" id="cards-2">
+[
+  {"front":"Qual evento dispara quando o Claude termina de responder?","back":"Stop."},
+  {"front":"Qual evento dispara quando o Claude precisa de você (permissão, idle 60s+, elicitação MCP)?","back":"Notification."},
+  {"front":"Como filtrar o Notification para só alertar em pedido de permissão?","back":"Checar se notification_type é \"permission_prompt\" antes de notificar."},
+  {"front":"Comando de notificação no Linux vs macOS?","back":"notify-send (Linux) vs osascript -e 'display notification ...' (macOS)."},
+  {"front":"O que o campo notification_type descreve?","back":"O motivo do disparo: permission_prompt, idle_prompt, auth_success ou elicitation_dialog."}
+]
+</script>
+</section>
+
+<!-- ===================== VIEW: AULA 3 ===================== -->
+<section class="view" id="v-aula-3" data-aula="3">
+<header class="hero"><div class="hero-inner">
+  <div>
+    <p class="kicker">Trilha 03 · Aula 3 · Intermediário</p>
+    <h1>Registrar<br>os <em>comandos</em></h1>
+    <p class="lead">PreToolUse em Bash grava cada comando com hora — um diário de tudo que a sessão rodou, sem bloquear nada.</p>
+    <p class="cue"><span class="arw">↓</span> role para estudar</p>
+  </div>
+  <div class="herofig">
+    <svg viewBox="0 0 300 240" fill="none" aria-hidden="true">
+      <rect x="40" y="40" width="220" height="160" rx="12" fill="#15131d" stroke="#37324a" stroke-width="1.5"/>
+      <text x="56" y="70" font-family="Space Mono, monospace" font-size="10" fill="#948DA6">12:04:01 ls</text>
+      <text x="56" y="94" font-family="Space Mono, monospace" font-size="10" fill="#948DA6">12:04:22 git status</text>
+      <text x="56" y="118" font-family="Space Mono, monospace" font-size="10" fill="#7CE0C6">12:05:03 npm test</text>
+      <text x="56" y="142" font-family="Space Mono, monospace" font-size="10" fill="#948DA6">12:06:40 git commit</text>
+      <rect class="blink" x="56" y="152" width="9" height="14" fill="#7CE0C6"/>
+      <text x="150" y="216" text-anchor="middle" font-family="Newsreader, serif" font-style="italic" font-size="15" fill="#C7C2D0">um diário de tudo que rodou</text>
+    </svg>
+  </div>
+</div></header>
+
+<div class="layout">
+  <div class="col">
+    <section class="step" data-fig="1">
+      <h2><span class="n">01</span> PreToolUse em Bash</h2>
+      <p>O evento <b class="gterm" tabindex="0" data-def="Evento que dispara ANTES de qualquer ferramenta rodar. Pode bloquear a ação saindo com exit 2 — mas aqui vamos só observar.">PreToolUse</b> dispara <b>antes</b> de qualquer ferramenta executar. Com matcher <code>"Bash"</code>, ele pega só os comandos de terminal — antes de eles rodarem de verdade.</p>
+      <p>Aqui não vamos bloquear nada: o hook só <b>observa</b> e deixa seguir. É um registro, não uma trava.</p>
+      <div class="mobfig" data-mobfig="1"></div>
+      <div class="quiz" data-answer="a">
+        <p class="qk">Teste-se</p>
+        <p class="q">Um hook <code>PreToolUse</code> com matcher <code>"Bash"</code> dispara quando?</p>
+        <button class="opt" data-k="a" data-fb="Pre = antes. O hook vê o comando antes de ele ser executado de verdade.">antes de o comando rodar</button>
+        <button class="opt" data-k="b">depois de o comando rodar</button>
+        <button class="opt" data-k="c">só quando o comando falha</button>
+        <p class="qfb"></p>
+      </div>
+      <button class="readbtn" data-read="s1">marcar como lido</button>
+    </section>
+
+    <section class="step" data-fig="2">
+      <h2><span class="n">02</span> Anexar num log com timestamp</h2>
+      <p>Cada linha do log carrega a <b>hora</b> em que o comando ia rodar. Monte o carimbo com <code>date</code>:</p>
+      <pre><span class="c"># .claude/hooks/log-cmd.sh (PreToolUse, matcher "Bash")</span>
+ts=$(date -u +%Y-%m-%dT%H:%M:%SZ)</pre>
+      <p>Sozinho isso não faz nada ainda — falta pegar o comando em si, que vem na próxima seção.</p>
+      <div class="mobfig" data-mobfig="2"></div>
+      <button class="readbtn" data-read="s2">marcar como lido</button>
+    </section>
+
+    <section class="step" data-fig="3">
+      <h2><span class="n">03</span> Extrair o command com jq</h2>
+      <p>O texto do comando vem no JSON do stdin, campo <b class="gterm" tabindex="0" data-def="Campo do JSON de entrada com o comando de Bash que está prestes a rodar.">tool_input.command</b>. Junte com o timestamp e anexe num arquivo:</p>
+      <pre>cmd=$(jq -r '.tool_input.command')
+printf '%s\t%s\n' "$ts" "$cmd" &gt;&gt; "$CLAUDE_PROJECT_DIR/.claude/cmd.log"
+exit 0</pre>
+      <p><b class="gterm" tabindex="0" data-def="Variável de ambiente que aponta pra raiz do projeto — útil pra montar caminhos de log ou de scripts sem depender do diretório atual.">$CLAUDE_PROJECT_DIR</b> garante que o log vai sempre pro mesmo lugar, não importa de onde o comando foi disparado. E <code>exit 0</code> — o hook nunca barra, só grava.</p>
+      <div class="mobfig" data-mobfig="3"></div>
+      <div class="quiz" data-answer="c">
+        <p class="qk">Teste-se</p>
+        <p class="q">Onde vem o texto do comando que o Bash vai rodar?</p>
+        <button class="opt" data-k="a">numa variável de ambiente $BASH_COMMAND</button>
+        <button class="opt" data-k="b">direto no settings.json</button>
+        <button class="opt" data-k="c" data-fb="O comando chega no JSON do stdin, em .tool_input.command — você lê com jq.">no JSON do stdin: tool_input.command (lido com jq)</button>
+        <p class="qfb"></p>
+      </div>
+      <button class="readbtn" data-read="s3">marcar como lido</button>
+    </section>
+
+    <section class="step" data-fig="4">
+      <h2><span class="n">04</span> Auditoria simples do que rodou</h2>
+      <p>O <code>cmd.log</code> vira um diário: todo comando, com hora, em ordem. Útil pra revisar o que uma sessão fez, investigar um comando estranho, ou reconstruir uma linha do tempo depois.</p>
+      <p>Um cuidado: hooks rodam com <b>permissão total</b> do seu usuário. Se um comando tiver um token ou senha embutido, ele vai parar no log — não deixe esse arquivo sair do <code>.gitignore</code> nem circular por aí.</p>
+      <div class="mobfig" data-mobfig="4"></div>
+      <details>
+        <summary>Indo mais fundo</summary>
+        <p>O log é só leitura pra você depois — o hook em si nunca deve <b>bloquear</b> com base nele. Quem bloqueia é uma trava separada (aula anterior da trilha); este hook aqui só observa.</p>
+      </details>
+      <div class="quiz" data-answer="b">
+        <p class="qk">Teste-se</p>
+        <p class="q">Este hook de log deve bloquear o comando antes de ele rodar?</p>
+        <button class="opt" data-k="a">sim, sempre — é mais seguro</button>
+        <button class="opt" data-k="b" data-fb="Um hook de log só observa: sai com exit 0 e deixa o comando seguir. Bloquear é papel de uma trava, não de um log.">não — ele só observa e sai com exit 0</button>
+        <button class="opt" data-k="c">só se o comando for git push</button>
+        <p class="qfb"></p>
+      </div>
+      <button class="readbtn" data-read="s4">marcar como lido</button>
+    </section>
+
+    <section class="practice" data-practice="p3">
+      <p class="pk">Pratique agora <span class="pcount">0/4 feito</span></p>
+      <h3 class="ph">Log datado de todo comando</h3>
+      <p class="pgoal">Grave, com hora, cada comando de Bash que o Claude rodar nesta sessão. ~5 min, seguro (só observa, sai sempre com exit 0).</p>
+      <div class="pcodewrap"><button class="pcopy" type="button">copiar</button><pre class="pcode">{
+  <span class="k">"hooks"</span>: {
+    <span class="k">"PreToolUse"</span>: [
+      {
+        <span class="k">"matcher"</span>: "Bash",
+        <span class="k">"hooks"</span>: [
+          { "type": "command", "command": "jq -r '(now|gmtime|strftime(\"%Y-%m-%d %H:%M:%S\")) + \" \" + .tool_input.command' &gt;&gt; \"$CLAUDE_PROJECT_DIR/.claude/cmd.log\"; exit 0" }
+        ]
+      }
+    ]
+  }
+}</pre></div>
+      <ol class="psteps">
+        <li><label><input type="checkbox" data-ptask="1"> Cole o bloco no <code>.claude/settings.json</code> e salve.</label></li>
+        <li><label><input type="checkbox" data-ptask="2"> Peça ao Claude pra rodar 2 ou 3 comandos (ex.: <code>ls</code>, <code>git status</code>).</label></li>
+        <li><label><input type="checkbox" data-ptask="3"> Rode <code>cat .claude/cmd.log</code> no terminal.</label></li>
+        <li><label><input type="checkbox" data-ptask="4"> Confirme: cada linha tem a hora exata seguida do comando.</label></li>
+      </ol>
+      <p class="pdone">✓ Fechamento: agora existe um diário datado de tudo que a sessão rodou — auditável, sem bloquear nada.</p>
+    </section>
+  </div>
+
+  <aside class="rail"><div class="railsticky">
+    <div class="figstage">
+      <div class="fig on" data-fig="1" data-cap="<b>Fig.</b> PreToolUse(Bash) → grava antes de rodar">
+        <svg viewBox="0 0 220 200" fill="none" aria-hidden="true">
+          <rect x="20" y="82" width="60" height="34" rx="8" fill="none" stroke="#7CE0C6"/><text x="50" y="103" text-anchor="middle" font-family="Space Mono" font-size="9" fill="#7CE0C6">Pre</text>
+          <path class="breathe" d="M84 100 H116" stroke="#37324a" stroke-width="2"/><path d="M116 94 l10 6 -10 6z" fill="#37324a"/>
+          <rect x="128" y="82" width="70" height="34" rx="8" fill="#221f2e" stroke="#37324a"/><text x="163" y="103" text-anchor="middle" font-family="Space Mono" font-size="9" fill="#C7C2D0">bash cmd</text>
+        </svg>
+      </div>
+      <div class="fig" data-fig="2" data-cap="<b>Fig.</b> date -u → timestamp ISO">
+        <svg viewBox="0 0 220 200" fill="none" aria-hidden="true">
+          <circle cx="110" cy="100" r="42" fill="none" stroke="#37324a" stroke-width="1.5"/>
+          <line class="pulse" x1="110" y1="100" x2="110" y2="70" stroke="#7CE0C6" stroke-width="2"/>
+          <line class="pulse" x1="110" y1="100" x2="132" y2="112" stroke="#7CE0C6" stroke-width="2"/>
+          <text x="110" y="164" text-anchor="middle" font-family="Space Mono" font-size="9" fill="#948DA6">2026-07-04T12:04:01Z</text>
+        </svg>
+      </div>
+      <div class="fig" data-fig="3" data-cap="<b>Fig.</b> jq -r '.tool_input.command'">
+        <svg viewBox="0 0 220 200" fill="none" aria-hidden="true">
+          <rect x="20" y="70" width="70" height="60" rx="10" fill="#15131d" stroke="#37324a"/><text x="30" y="94" font-family="Space Mono" font-size="8" fill="#948DA6">tool_input</text><text x="30" y="110" font-family="Space Mono" font-size="8" fill="#7CE0C6">.command</text>
+          <path class="breathe" d="M94 100 H126" stroke="#7CE0C6" stroke-width="2"/><path d="M126 94 l10 6 -10 6z" fill="#7CE0C6"/>
+          <rect x="138" y="82" width="40" height="36" rx="8" fill="#221f2e" stroke="#37324a"/><text x="158" y="105" text-anchor="middle" font-family="Space Mono" font-size="10" fill="#7CE0C6">jq</text>
+        </svg>
+      </div>
+      <div class="fig" data-fig="4" data-cap="<b>Fig.</b> cmd.log = diário auditável">
+        <svg viewBox="0 0 220 200" fill="none" aria-hidden="true">
+          <rect x="50" y="40" width="120" height="120" rx="10" fill="#15131d" stroke="#37324a"/>
+          <line class="breathe" x1="66" y1="62" x2="150" y2="62" stroke="#7CE0C6" stroke-width="2"/>
+          <line class="breathe" x1="66" y1="82" x2="140" y2="82" stroke="#7CE0C6" stroke-width="2" style="animation-delay:.3s"/>
+          <line class="breathe" x1="66" y1="102" x2="154" y2="102" stroke="#7CE0C6" stroke-width="2" style="animation-delay:.6s"/>
+          <line x1="66" y1="122" x2="128" y2="122" stroke="#948DA6" stroke-width="2"/>
+          <text x="110" y="184" text-anchor="middle" font-family="Newsreader, serif" font-style="italic" font-size="12" fill="#C7C2D0">nunca bloqueia, só observa</text>
+        </svg>
+      </div>
+    </div>
+    <p class="railcap"></p>
+    <div class="steps-ind"></div>
+    <p class="sidenote">Grife qualquer trecho do texto para virar um <b>flashcard</b> de revisão.</p>
+  </div></aside>
+</div>
+
+<nav class="lnav"><a href="#aula-2">← Aula 2</a><a href="#aula-4">Aula 4 · Injetar contexto no começo →</a></nav>
+<footer>Aula 3 de 4 · Trilha 03 · Automação · INEMA.CLUB PRO</footer>
+
+<script type="application/json" id="cards-3">
+[
+  {"front":"Qual evento + matcher grava comandos ANTES de rodar?","back":"PreToolUse com matcher \"Bash\"."},
+  {"front":"Onde vem o texto do comando a ser executado?","back":"tool_input.command, no JSON do stdin (lido com jq)."},
+  {"front":"Que variável aponta pra raiz do projeto, útil pra achar o log?","back":"$CLAUDE_PROJECT_DIR."},
+  {"front":"Um hook de log deve sair com que código?","back":"exit 0 — só observa, nunca bloqueia."},
+  {"front":"Por que não deixar o cmd.log circular por aí?","back":"Hooks rodam com permissão total do usuário; se um comando tiver token/senha, ela para no log."}
+]
+</script>
+</section>
+
+<!-- ===================== VIEW: AULA 4 ===================== -->
+<section class="view" id="v-aula-4" data-aula="4">
+<header class="hero"><div class="hero-inner">
+  <div>
+    <p class="kicker">Trilha 03 · Aula 4 · Intermediário</p>
+    <h1>Injetar contexto<br>no <em>começo</em></h1>
+    <p class="lead">SessionStart e UserPromptSubmit entregam contexto direto pro Claude — branch, git status, regras do projeto — sem você colar nada.</p>
+    <p class="cue"><span class="arw">↓</span> role para estudar</p>
+  </div>
+  <div class="herofig">
+    <svg viewBox="0 0 300 240" fill="none" aria-hidden="true">
+      <circle cx="70" cy="120" r="30" fill="none" stroke="#7CE0C6" stroke-width="1.5"/><text x="70" y="124" text-anchor="middle" font-family="Space Mono, monospace" font-size="10" fill="#7CE0C6">start</text>
+      <path class="breathe" d="M104 120 H160" stroke="#7CE0C6" stroke-width="2"/><path d="M160 112 l12 8 -12 8z" fill="#7CE0C6"/>
+      <rect x="176" y="66" width="104" height="108" rx="12" fill="#15131d" stroke="#37324a" stroke-width="1.5"/>
+      <text x="190" y="92" font-family="Space Mono, monospace" font-size="10" fill="#F2B45C">branch: main</text>
+      <text x="190" y="114" font-family="Space Mono, monospace" font-size="10" fill="#948DA6">M  file.js</text>
+      <text x="190" y="136" font-family="Space Mono, monospace" font-size="10" fill="#948DA6">?? novo.md</text>
+      <rect class="blink" x="190" y="146" width="9" height="14" fill="#7CE0C6"/>
+      <text x="150" y="216" text-anchor="middle" font-family="Newsreader, serif" font-style="italic" font-size="15" fill="#C7C2D0">o contexto certo entra sozinho</text>
+    </svg>
+  </div>
+</div></header>
+
+<div class="layout">
+  <div class="col">
+    <section class="step" data-fig="1">
+      <h2><span class="n">01</span> SessionStart e UserPromptSubmit</h2>
+      <p><b class="gterm" tabindex="0" data-def="Evento que dispara uma vez, quando a sessão do Claude Code começa. Ótimo pra injetar contexto inicial do projeto.">SessionStart</b> dispara <b>uma vez</b>, quando a sessão abre. <b class="gterm" tabindex="0" data-def="Evento que dispara a cada mensagem enviada por você; também pode injetar contexto extra, mas a cada turno.">UserPromptSubmit</b> dispara a <b>cada mensagem</b> que você envia. Nenhum dos dois é evento de ferramenta — não usam matcher, simplesmente disparam no momento certo.</p>
+      <p>Os dois podem devolver contexto extra pro Claude. A diferença é a frequência: um contexto de sessão (branch, regras do projeto) vai no <code>SessionStart</code>; algo que muda a cada mensagem entraria no <code>UserPromptSubmit</code> — com moderação, pra não repetir toda hora.</p>
+      <div class="mobfig" data-mobfig="1"></div>
+      <div class="quiz" data-answer="a">
+        <p class="qk">Teste-se</p>
+        <p class="q">Qual evento dispara UMA VEZ, no início da sessão?</p>
+        <button class="opt" data-k="a" data-fb="SessionStart roda uma vez, quando a sessão abre. UserPromptSubmit repete a cada mensagem sua.">SessionStart</button>
+        <button class="opt" data-k="b">UserPromptSubmit</button>
+        <button class="opt" data-k="c">Stop</button>
+        <p class="qfb"></p>
+      </div>
+      <button class="readbtn" data-read="s1">marcar como lido</button>
+    </section>
+
+    <section class="step" data-fig="2">
+      <h2><span class="n">02</span> additionalContext dentro de hookSpecificOutput</h2>
+      <p>Pra entregar contexto de verdade, o hook devolve <b>JSON estruturado</b> no stdout, com o texto dentro de <b class="gterm" tabindex="0" data-def="Objeto no JSON de saída do hook com campos específicos do evento — por exemplo additionalContext (SessionStart/UserPromptSubmit) ou permissionDecision (PreToolUse).">hookSpecificOutput</b>, campo <b class="gterm" tabindex="0" data-def="Campo dentro de hookSpecificOutput cujo texto é entregue ao Claude como contexto extra, junto com o resto do que ele já sabe.">additionalContext</b>:</p>
+      <pre>{
+  "hookSpecificOutput": {
+    "hookEventName": "SessionStart",
+    "additionalContext": "Branch: main\nMudanças: 2 arquivos"
+  }
+}</pre>
+      <p>É esse texto — e só ele — que chega ao Claude como contexto extra. Nada de imprimir solto no stdout esperando que "apareça"; o formato importa.</p>
+      <div class="mobfig" data-mobfig="2"></div>
+      <div class="quiz" data-answer="c">
+        <p class="qk">Teste-se</p>
+        <p class="q">Onde fica o texto que o hook injeta como contexto pro Claude?</p>
+        <button class="opt" data-k="a">no campo reason</button>
+        <button class="opt" data-k="b">no exit code do hook</button>
+        <button class="opt" data-k="c" data-fb="O texto de contexto vai em hookSpecificOutput.additionalContext, no JSON impresso no stdout.">dentro de hookSpecificOutput.additionalContext</button>
+        <p class="qfb"></p>
+      </div>
+      <button class="readbtn" data-read="s2">marcar como lido</button>
+    </section>
+
+    <section class="step" data-fig="3">
+      <h2><span class="n">03</span> Injetar git status / CLAUDE.md / TODO</h2>
+      <p>Combine as fontes que importam: branch atual, o que mudou, talvez uma linha dizendo que existe um <code>CLAUDE.md</code> com regras. Monte a string e escape com <code>jq -Rs</code> pra virar um valor JSON válido:</p>
+      <pre><span class="c"># .claude/hooks/session-context.sh (SessionStart)</span>
+branch=$(git branch --show-current)
+status=$(git status --short)
+ctx="Branch: $branch"$'\n'"Mudanças:"$'\n'"$status"
+printf '{"hookSpecificOutput":{"hookEventName":"SessionStart","additionalContext":%s}}' \
+  "$(printf '%s' "$ctx" | jq -Rs .)"</pre>
+      <p>O <code>jq -Rs .</code> lê texto puro (não JSON) e devolve uma <b>string JSON</b> já escapada — quebras de linha e aspas incluídas. Sem isso, um <code>\n</code> solto quebraria o JSON de saída.</p>
+      <div class="mobfig" data-mobfig="3"></div>
+      <button class="readbtn" data-read="s3">marcar como lido</button>
+    </section>
+
+    <section class="step" data-fig="4">
+      <h2><span class="n">04</span> Contexto certo e curto</h2>
+      <p>A tentação é jogar o projeto inteiro no <code>additionalContext</code>. Resista: contexto demais <b>polui</b> e desperdiça espaço que o Claude usaria pra pensar no seu pedido. Injete só o que <b>muda a decisão</b> dele agora — branch, o que está sujo, uma ou duas linhas de regra — não o histórico inteiro.</p>
+      <p>Regra prática: se você não colaria aquilo manualmente numa mensagem, não injete automaticamente também.</p>
+      <div class="mobfig" data-mobfig="4"></div>
+      <details>
+        <summary>Indo mais fundo</summary>
+        <p>Combine os quatro hooks da trilha e o ambiente cuida de si mesmo: formata ao salvar, avisa quando termina, registra o que rodou, e já entrega o contexto certo assim que a sessão abre.</p>
+      </details>
+      <div class="quiz" data-answer="b">
+        <p class="qk">Teste-se</p>
+        <p class="q">Por que não jogar o conteúdo inteiro do projeto no additionalContext sempre?</p>
+        <button class="opt" data-k="a">porque isso quebra o formato JSON</button>
+        <button class="opt" data-k="b" data-fb="Contexto demais polui e desperdiça espaço. Prefira injetar só o que muda a decisão do Claude agora.">porque polui e desperdiça espaço — prefira só o que muda a decisão</button>
+        <button class="opt" data-k="c">porque o Claude Code não permite</button>
+        <p class="qfb"></p>
+      </div>
+      <button class="readbtn" data-read="s4">marcar como lido</button>
+    </section>
+
+    <section class="practice" data-practice="p4">
+      <p class="pk">Pratique agora <span class="pcount">0/4 feito</span></p>
+      <h3 class="ph">SessionStart injeta branch + git status <span style="color:var(--faint)">· capstone</span></h3>
+      <p class="pgoal">Deixe a sessão abrir já sabendo o branch e o que mudou no projeto — sem você contar nada. ~8 min.</p>
+      <div class="pcodewrap"><button class="pcopy" type="button">copiar</button><pre class="pcode">{
+  <span class="k">"hooks"</span>: {
+    <span class="k">"SessionStart"</span>: [
+      {
+        <span class="k">"hooks"</span>: [
+          { "type": "command", "command": "bash .claude/hooks/session-context.sh" }
+        ]
+      }
+    ]
+  }
+}</pre></div>
+      <ol class="psteps">
+        <li><label><input type="checkbox" data-ptask="1"> Crie <code>.claude/hooks/session-context.sh</code> com o script da seção 03.</label></li>
+        <li><label><input type="checkbox" data-ptask="2"> Dê permissão de execução: <code>chmod +x .claude/hooks/session-context.sh</code>.</label></li>
+        <li><label><input type="checkbox" data-ptask="3"> Cole o bloco de settings.json acima e salve.</label></li>
+        <li><label><input type="checkbox" data-ptask="4"> Abra uma sessão nova nesse projeto e pergunte "qual é o branch atual?" — ele já sabe.</label></li>
+      </ol>
+      <p class="pdone">✓ Capstone: a sessão abre já sabendo do projeto — branch, mudanças, tudo isso sem você colar nada. Fim da trilha de automação.</p>
+    </section>
+  </div>
+
+  <aside class="rail"><div class="railsticky">
+    <div class="figstage">
+      <div class="fig on" data-fig="1" data-cap="<b>Fig.</b> SessionStart (1x) · UserPromptSubmit (cada msg)">
+        <svg viewBox="0 0 220 200" fill="none" aria-hidden="true">
+          <circle cx="50" cy="100" r="20" fill="none" stroke="#7CE0C6"/><text x="50" y="104" text-anchor="middle" font-family="Space Mono" font-size="8" fill="#7CE0C6">start</text>
+          <circle class="breathe" cx="110" cy="100" r="10" fill="none" stroke="#948DA6"/>
+          <circle class="breathe" cx="140" cy="100" r="10" fill="none" stroke="#948DA6" style="animation-delay:.3s"/>
+          <circle class="breathe" cx="170" cy="100" r="10" fill="none" stroke="#948DA6" style="animation-delay:.6s"/>
+          <text x="140" y="140" text-anchor="middle" font-family="Space Mono" font-size="8" fill="#948DA6">msg · msg · msg</text>
+        </svg>
+      </div>
+      <div class="fig" data-fig="2" data-cap="<b>Fig.</b> hookSpecificOutput.additionalContext">
+        <svg viewBox="0 0 220 210" fill="none" aria-hidden="true">
+          <rect x="20" y="20" width="180" height="26" rx="7" fill="#221f2e" stroke="#37324a"/><text x="34" y="37" font-family="Space Mono" font-size="9" fill="#948DA6">hookSpecificOutput</text>
+          <path d="M34 46 V64 H54" stroke="#37324a"/>
+          <rect class="breathe" x="54" y="66" width="140" height="26" rx="7" fill="none" stroke="#7CE0C6"/><text x="66" y="83" font-family="Space Mono" font-size="9" fill="#7CE0C6">additionalContext</text>
+        </svg>
+      </div>
+      <div class="fig" data-fig="3" data-cap="<b>Fig.</b> branch + git status → contexto">
+        <svg viewBox="0 0 220 200" fill="none" aria-hidden="true">
+          <rect x="20" y="60" width="70" height="30" rx="7" fill="#221f2e" stroke="#37324a"/><text x="55" y="80" text-anchor="middle" font-family="Space Mono" font-size="8" fill="#C7C2D0">branch</text>
+          <rect x="20" y="100" width="70" height="30" rx="7" fill="#221f2e" stroke="#37324a"/><text x="55" y="120" text-anchor="middle" font-family="Space Mono" font-size="8" fill="#C7C2D0">status</text>
+          <path class="breathe" d="M94 95 H126" stroke="#7CE0C6" stroke-width="2"/><path d="M126 89 l10 6 -10 6z" fill="#7CE0C6"/>
+          <rect x="138" y="70" width="62" height="50" rx="8" fill="none" stroke="#7CE0C6"/><text x="169" y="99" text-anchor="middle" font-family="Space Mono" font-size="8" fill="#7CE0C6">contexto</text>
+        </svg>
+      </div>
+      <div class="fig" data-fig="4" data-cap="<b>Fig.</b> curto e certo, não o projeto inteiro">
+        <svg viewBox="0 0 220 200" fill="none" aria-hidden="true">
+          <rect x="20" y="40" width="80" height="90" rx="8" fill="#221f2e" stroke="#37324a"/>
+          <path d="M28 48 l64 74 M92 48 l-64 74" stroke="#6C6580" stroke-width="2"/>
+          <text x="60" y="150" text-anchor="middle" font-family="Space Mono" font-size="8" fill="#6C6580">tudo</text>
+          <rect class="breathe" x="130" y="70" width="70" height="40" rx="8" fill="none" stroke="#7CE0C6"/><text x="165" y="94" text-anchor="middle" font-family="Space Mono" font-size="8" fill="#7CE0C6">só o que</text><text x="165" y="106" text-anchor="middle" font-family="Space Mono" font-size="8" fill="#7CE0C6">importa</text>
+        </svg>
+      </div>
+    </div>
+    <p class="railcap"></p>
+    <div class="steps-ind"></div>
+    <p class="sidenote">Grife qualquer trecho do texto para virar um <b>flashcard</b> de revisão.</p>
+  </div></aside>
+</div>
+
+<nav class="lnav"><a href="#aula-3">← Aula 3</a><a href="curso-time.html#trilha">Trilha 04 · Equipe &amp; CI →</a></nav>
+<footer>Aula 4 de 4 · Trilha 03 · Automação · INEMA.CLUB PRO</footer>
+
+<script type="application/json" id="cards-4">
+[
+  {"front":"Qual evento dispara uma vez, no início da sessão?","back":"SessionStart."},
+  {"front":"Qual evento dispara a cada mensagem enviada por você?","back":"UserPromptSubmit."},
+  {"front":"Onde vai o texto que o hook injeta como contexto pro Claude?","back":"Em hookSpecificOutput.additionalContext, no JSON impresso no stdout."},
+  {"front":"Que comando lista as mudanças não commitadas, pra injetar no contexto?","back":"git status --short."},
+  {"front":"Por que manter o contexto injetado curto?","back":"Contexto demais polui e desperdiça espaço — injete só o que muda a decisão do Claude."},
+  {"front":"Por que usar jq -Rs ao montar o additionalContext?","back":"Pra escapar corretamente quebras de linha e aspas ao gerar uma string JSON válida."}
+]
+</script>
+</section>
+
+<script src="assets/curso.js"></script>
+</body>
+</html>
